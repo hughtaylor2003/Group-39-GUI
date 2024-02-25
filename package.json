@@ -1,6 +1,7 @@
 {
   "name": "gui-group-2024",
   "version": "0.1.0",
+  "homepage": "https://github.com/hughtaylor2003/Group-39-GUI/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -13,9 +14,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
++   "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
   },
   "eslintConfig": {
     "extends": [

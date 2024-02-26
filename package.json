@@ -1,5 +1,5 @@
 {
-  "name": "Group-39-GUI",
+  "name": "group39gui",
   "version": "0.1.0",
   "homepage": "https://hughtaylor2003.github.io/Group-39-GUI/",
   "private": true,
@@ -16,7 +16,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

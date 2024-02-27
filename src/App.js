@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     if (currentLocation) {
-      axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${currentLocation}&limit=1&appid=1648041e6f58356be2fc481bbf3e2e93`)
+      axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${currentLocation}&limit=1&appid=1648041e6f58356be2fc481bbf3e2e93`)
         .then(res => {
           const [place] = res.data;
           if (place) {

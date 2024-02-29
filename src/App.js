@@ -17,7 +17,7 @@ function App() {
         .then(res => {
           const [place] = res.data;
           if (place) {
-            axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${place.lat}&lon=${place.lon}&appid=1648041e6f58356be2fc481bbf3e2e93`)
+            axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${place.lat}&lon=${place.lon}&units={metric}&appid=1648041e6f58356be2fc481bbf3e2e93`)
               .then(res => {
                 console.log(res.data.daily);
                 setWeather(res.data.daily);
@@ -64,7 +64,7 @@ function App() {
             {weather.map((item, index) => (
               <div className="weather-card" key={index}>
                 <p>Date: {new Date(item.dt * 1000).toLocaleDateString()}</p>
-                <p>Tempreture: {item.temp['day']}</p>
+                <p>Tempreture: {item.temp['day']}°C</p>
                 {settings.suntimes && <p>Sunrise: {unixTimestampTo12Hour(item.sunrise)}</p>}
                 {settings.suntimes && <p>Sunset: {unixTimestampTo12Hour(item.sunset)}</p>}
                 {settings.humidity && <p>Humidity: {item.humidity}</p>}

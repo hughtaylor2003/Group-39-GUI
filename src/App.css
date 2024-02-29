@@ -6,6 +6,7 @@
 
 body{
   height: 100vh;
+  overflow-y: hidden;
 }
 
 .App {
@@ -25,7 +26,6 @@ body.settings-open .App {
   top: 0;
   left: 100%;
   width: 100vw;
-  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   transition: left 0.5s ease-out; /* Add transition for smooth animation */
 }
@@ -75,10 +75,15 @@ body.settings-open .Settings-Parent {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-height: calc(100vh - 50px); /* Adjust 50px as needed to leave space for other elements */
+  max-height: calc(100vh - 200px); /* Adjust 50px as needed to leave space for other elements */
   overflow-y: auto; /* Enable vertical scrolling if necessary */
-}
+  scrollbar-color: 0;
+  }
 
+
+  ::-webkit-scrollbar {
+    display: none;
+}
 
 .weather-card {
   background-color: #f0f0f0;

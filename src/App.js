@@ -9,7 +9,7 @@ function App() {
   const [locationInput, setLocationInput] = useState('');
   const [currentLocation, setCurrentLocation] = useState('London');
   const [error, setError] = useState('');
-  const [settings, setSettings] = useState({ suntimes: false, humidity: false, uvi: false });
+  const [settings, setSettings] = useState({ suntimes: false, humidity: false, uvi: false, Farenhight: false});
 
   useEffect(() => {
     if (currentLocation) {
@@ -17,7 +17,9 @@ function App() {
         .then(res => {
           const [place] = res.data;
           if (place) {
-            axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${place.lat}&lon=${place.lon}&units={metric}&appid=1648041e6f58356be2fc481bbf3e2e93`)
+            let metric = settings.Farenhight ? "imperial" : "metric"
+            console.log(metric)
+            axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${place.lat}&lon=${place.lon}&units=${metric}&appid=1648041e6f58356be2fc481bbf3e2e93`)
               .then(res => {
                 console.log(res.data.daily);
                 setWeather(res.data.daily);
@@ -33,7 +35,7 @@ function App() {
           setError('Error fetching weather data. Please try again later.');
         });
     }
-  }, [currentLocation]);
+  }, [currentLocation, settings]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +66,7 @@ function App() {
             {weather.map((item, index) => (
               <div className="weather-card" key={index}>
                 <p>Date: {new Date(item.dt * 1000).toLocaleDateString()}</p>
-                <p>Tempreture: {item.temp['day']}°C</p>
+                {settings.Farenhight ? <p>Tempreture: {item.temp['day']}°F</p> : <p>Tempreture: {item.temp['day']}°C</p>}
                 {settings.suntimes && <p>Sunrise: {unixTimestampTo12Hour(item.sunrise)}</p>}
                 {settings.suntimes && <p>Sunset: {unixTimestampTo12Hour(item.sunset)}</p>}
                 {settings.humidity && <p>Humidity: {item.humidity}</p>}

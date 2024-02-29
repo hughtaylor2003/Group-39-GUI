@@ -4,6 +4,10 @@
   width: 200vw;
 }
 
+body{
+  height: 100vh;
+}
+
 .App {
   text-align: center;
   background: rgb(255, 246, 202);
@@ -71,8 +75,9 @@ body.settings-open .Settings-Parent {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-height: calc(100vh - 50px); /* Adjust 50px as needed to leave space for other elements */
+  overflow-y: auto; /* Enable vertical scrolling if necessary */
 }
-
 
 
 .weather-card {

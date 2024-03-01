@@ -11,6 +11,10 @@ function App() {
   const [error, setError] = useState('');
   const [settings, setSettings] = useState({ suntimes: false, humidity: false, uvi: false, Farenhight: false});
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  
+
   useEffect(() => {
     if (currentLocation) {
       axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${currentLocation}&limit=1&appid=1648041e6f58356be2fc481bbf3e2e93`)
@@ -44,13 +48,25 @@ function App() {
 
   const handleSettingsSubmit = (newSettings) => {
     setSettings(newSettings);
+    setIsOpen(!isOpen);
+  };
+
+  const toggleOverlay = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <>
+    
     <div className='Absolute-Parent'>
       <div className="App">
         <header className="App-header">
+
+          {/*Code for settings button */}
+          <button onClick={toggleOverlay}>Open Settings Page</button>
+          <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
+
+          {/*Code for location search bar */}
           <form onSubmit={handleFormSubmit} className='search-container'> {/* changed class name */}
             <input className='search-input'
               type="text"
@@ -62,6 +78,8 @@ function App() {
           </form>
           <h2>{currentLocation}</h2>
           {error && <p>{error}</p>}
+
+          {/*Code for weather card */}
           <div className="weather-cards">
             {weather.map((item, index) => (
               <div className="weather-card" key={index}>
@@ -76,7 +94,6 @@ function App() {
           </div>
         </header>
       </div>
-          <Settings className='Settings-Parent' onSubmit={handleSettingsSubmit}/>
     </div>
       
     </>

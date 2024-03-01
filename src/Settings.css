@@ -1,5 +1,6 @@
 /* settings.css */
 .settings-container {
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,8 +8,21 @@
   text-align: center;
   width: 300px;
   margin: auto;
-  border: 1px solid black;
+
+  /*Added by Jason: Fix stuff to the middle and span the settings page to whole screen */
+  background-color: rgb(200, 252, 255, 1);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 10;
   padding: 20px;
+  width: fit-content;
+  height: fit-content;
+  width: 100vw;
+  height: 100vw;
 }
 
 .settings-container div {
@@ -18,3 +32,5 @@
 .settings-container button {
   margin-top: 20px;
 }
+
+

@@ -21,18 +21,25 @@ body.settings-open .App {
   transform: translateX(-100%); /* Move the App to the left to reveal Settings */
 }
 
+
+/* For settings */
+/*
 .Settings-Parent {
   position: absolute;
   top: 0;
   left: 100%;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: left 0.5s ease-out; /* Add transition for smooth animation */
+  transition: left 0.5s ease-out; 
 }
 
 body.settings-open .Settings-Parent {
-  left: 0; /* Move the Settings-Parent to the left */
+  left: 0; 
 }
+*/
+
+
+
 
 .App-header {
   padding-top: 20px;

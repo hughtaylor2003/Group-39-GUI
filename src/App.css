@@ -11,7 +11,7 @@ body{
 
 .App {
   text-align: center;
-  background: rgb(255, 246, 202);
+  background: grey;
   background: linear-gradient(0deg, rgba(255, 246, 202, 1) 0%, rgba(200, 252, 255, 1) 99%);
   width: 100vw;
   transition: transform 0.5s ease-out; /* Add transition for smooth animation */

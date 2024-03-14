@@ -10,6 +10,7 @@ import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY } from "./api";
 
 function App() {
 
+
     const [currentWeather, setCurrentWeather] = useState(null);
     const [bookmarks, setBookmarks] = useState([]);
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
@@ -25,6 +26,7 @@ function App() {
     const handleOnSearchChange = (searchData) => {
 
         const [lat, lon] = searchData.value.split(" ");
+
 
         const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=metric`);
 
@@ -52,6 +54,7 @@ console.log(currentWeather);
   const toggleBookmarkPageOverlay = () => {
     setIsBookmarkPageOpen(!isBookmarkPageOpen);
   };
+
 
   useEffect(() => {
     if (!isSettingsOpen && !isBookmarkPageOpen) {

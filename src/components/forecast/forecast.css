@@ -1,76 +1,13 @@
-.title {
-    font-size: 23px;
-    font-weight: 700;
-    margin-left: 20px;
+.Parent-Block{
+    margin: 20px 0 20px 0   ;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent child elements from wrapping */
 }
 
-.daily-item {
-    background-color: #f5f5f5;
-    border-radius: 15px;
-    margin: 5px 20px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px 20px;
+@media screen and (min-width: 768px) {
+    .Parent-Block{
+        display: flex;
+        justify-content: center;
+    }
 }
 
-.icon-small {
-    width: 4px;
-}
-
-.day {
-    color: #212121;
-    font-weight: 600;
-    
-
-}
-
-.description {
-    color: #757575;
-    margin-right: 15px;
-    font-size: 12px;
-    flex-wrap:unset;
-}
-
-.daily-details-grid {
-    display: grid;
-    flex-direction: column;
-    border-radius: 18px;
-
-
-    background-color:darkgrey;
-}
-
-.daily-details-grid-item {
-    align-items: center;
-    justify-content: space-between;
-    height: 30px;
-    width: 40px;
-    margin-left: 8px;
-    margin-top: 8px;
-    
-}
-
-.horizontal-accordion {
-    display: flex;
-    flex-direction: row;
-
-    position: absolute;
-
-
-
-    overflow-x:scroll;
-
-
-
-}
-
-.horizontal-accordion-item {
-    flex: 1 1 1 1;
-    width: 200px;
-    margin-right: 20px;
-    margin-top: 20px;
-    display: inline-block;
-    overflow-y:scroll;
-}

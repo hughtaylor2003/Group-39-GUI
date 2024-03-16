@@ -1,0 +1,42 @@
+.Block{
+    text-align: center !important;
+    display: inline-block; /* Display child elements inline */
+    width: 15vw; /* Set the width of each child element */
+    margin-top: 20px;
+    height: 15vw; /* Set the height of each child element */
+    background-color: #46708B; /* Set background color */
+    font-size: 2vw;
+    filter: drop-shadow(0 0 2px black);
+    border-radius: 30%; /* Set border radius */
+    margin-right: 10px; /* Add some margin between child elements */
+    margin-bottom: 10px;
+
+    padding: 10px;
+
+}
+
+@media screen and (min-width: 768px) {
+    .Block{
+        width: 8vw;
+        height: 8vw;
+        font-size: 1vw;
+
+    }
+}
+
+.Inner-Parent{
+    display: flex;
+    height: 100%;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.Icon-And-Temp{
+    display: flex;
+    justify-content: center;
+
+}
+
+.icon{
+    width: 50%;
+}

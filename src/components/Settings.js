@@ -4,25 +4,23 @@ import './Settings.css'; // Importing the CSS file
 
 export default function Settings({ isOpen, isClosed, onSubmit }) {
   const [suntimes, setsuntimes] = useState(false);
-  const [humidity, sethumidity] = useState(false);
+  const [winddir, setwindir] = useState(false);
   const [uvi, setuvi] = useState(false);
   const [Farenhight, setFarenhight] = useState(false);
   
   const handleSubmit = () => {
-    onSubmit({ suntimes, humidity, uvi, Farenhight});
+    onSubmit({ suntimes, winddir, uvi, Farenhight});
   };
 
   const handleBackButtonClick = () => {
     isClosed();
   }
 
-
-
   return (
     <>
     {isOpen && (
+       <div className="settings-overlay">
        <div className="settings-container">
-        <button onClick={handleBackButtonClick}>Back</button>
        <div>
          <label>
            <input type="checkbox" checked={suntimes} onChange={() => setsuntimes(!suntimes)} />
@@ -31,8 +29,8 @@ export default function Settings({ isOpen, isClosed, onSubmit }) {
        </div>
        <div>
          <label>
-           <input type="checkbox" checked={humidity} onChange={() => sethumidity(!humidity)} />
-           Show Humidity
+           <input type="checkbox" checked={winddir} onChange={() => setwindir(!winddir)} />
+           Show Wind Direction
          </label>
        </div>
        <div>
@@ -49,7 +47,7 @@ export default function Settings({ isOpen, isClosed, onSubmit }) {
        </div>
        <button onClick={handleSubmit}>Submit</button>
      </div>
-
+     </div>
     )
     }
     </> 

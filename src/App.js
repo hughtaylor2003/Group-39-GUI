@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 import './App.css'; // Importing CSS file
-
 import Settings from './components/Settings';
 import Search from './components/search/search'; // Adjusted import path
 import CurrentWeather from './components/current-weather/current-weather';
@@ -12,6 +11,11 @@ import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY } from "./api";
 import DailyBreakDown from './DailyBreakDown';
 import Wind from './Wind';
 import Sunrise from './Sunrise';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PDFForecast from './components/PDFForecast';
+import generatePDF from './components/generatePDF';
+import { saveAs } from 'file-saver';
+import { pdf } from '@react-pdf/renderer';
 
 function App() {
 
@@ -23,6 +27,26 @@ function App() {
         setSettings(newSettings);
         setIsOpen(!isOpen);
       };
+
+    const getPDFDownload = () => {
+        if(currentWeather != null)
+         { return (
+          <PDFDownloadLink document={<PDFForecast WeatherData={currentWeather}/>} fileName="Forecast">
+          {({loading}) => (loading ? (<button>Loading</button>) : (<button>Download</button>))}
+          </PDFDownloadLink>)
+        }
+         
+    }
+
+    const downloadPDF = async() => {
+        const blob = await pdf((
+            <PDFForecast 
+             title='Forecast'
+             WeatherData={currentWeather}
+             />
+        )).toBlob();
+        saveAs(blob,'forecast');
+    }
     
 
     const [currentWeather, setCurrentWeather] = useState(null);
@@ -63,6 +87,7 @@ function App() {
             <div className="mobile-toggle">
             {currentWeather && <DailyBreakDown data={currentWeather}/>}
             <div>
+            {currentWeather &&  <button onClick={() => downloadPDF()}> Download</button>}
             <h2>Extra Options</h2>
             {settings.winddir&&<Wind data={currentWeather}></Wind>}
             {settings.suntimes&&<Sunrise data={currentWeather}></Sunrise>}

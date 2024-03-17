@@ -8,23 +8,26 @@ import Settings from './components/Settings';
 import Search from './components/search/search'; // Adjusted import path
 import CurrentWeather from './components/current-weather/current-weather';
 import Forecast from './components/forecast/forecast';
+import Extras from './components/extras/Extras';
 import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY } from "./api";
 import DailyBreakDown from './DailyBreakDown';
 import Wind from './Wind';
 import Sunrise from './Sunrise';
 
+
 function App() {
 
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
-      };
+    };
 
     const handleSettingsSubmit = (newSettings) => {
         setSettings(newSettings);
         setIsOpen(!isOpen);
-      };
+    };
     
-
+    
+    const [ActiveIndex, SetActiveIndex] = useState(0)
     const [currentWeather, setCurrentWeather] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [settings, setSettings] = useState({ suntimes: false, winddir: false, uvi: false, Farenhight: false});
@@ -52,25 +55,25 @@ function App() {
     };
 
     return (
-<>            <div className='Search-And-Settings'>
-                <div className='search'>
-            <Search onSearchChange={handleOnSearchChange} />
+<>      <div className='Search-And-Settings'>
+            <div className='search'>
+                <Search onSearchChange={handleOnSearchChange} />
             </div>
             <img onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
-            </div>
+        </div>
+            
             {currentWeather && <CurrentWeather data={currentWeather} />}
-            {currentWeather && <Forecast data={currentWeather}/>}
+            {currentWeather && <Forecast data={currentWeather} test ={SetActiveIndex}/>}
+            
             <div className="mobile-toggle">
-            {currentWeather && <DailyBreakDown data={currentWeather}/>}
-            <div>
-            <h2>Extra Options</h2>
-            {settings.winddir&&<Wind data={currentWeather}></Wind>}
-            {settings.suntimes&&<Sunrise data={currentWeather}></Sunrise>}
+                {currentWeather && <DailyBreakDown data={currentWeather}/>}
+                
             </div>
-            </div>
+            
+            {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
             </>
-
+        
         );
 }
 

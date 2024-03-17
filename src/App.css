@@ -15,6 +15,9 @@ body{
   background: rgb(255,220,124);
   background: linear-gradient(0deg, rgba(255,220,124,1) 0%, rgba(119,245,255,1) 100%);
   color:whitesmoke;
+
+  
+  background-attachment: fixed;
 }
 
 .App {

@@ -1,6 +1,6 @@
 first commit: 
 
-Added by Jason:
+Added by Jason: <br />
 Extra Options has been modified. <br />
 (includes changing colour of panel background. Made text colour black since it was kinda hard to see. Made details dynamic as they can change by clicking on day panel) <br />
 Changed the current weather forecast to include icons for weather details. <br />

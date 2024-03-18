@@ -1,8 +1,9 @@
 import React from 'react'
 import HourlyBlock from './components/forecast/HourlyBlock';
 import './DailyBreakDown.css'
+import dayjs from 'dayjs'
 
-export default function DailyBreakDown({data}) {
+export default function DailyBreakDown({data, hrdata}) {
 
     // Function to convert Unix timestamp to time in "hh:mm am/pm" format
 function unixTimestampToTime(timestamp) {
@@ -36,6 +37,11 @@ function unixTimestampToTime(timestamp) {
     // Return the time in "hh:mm am/pm" format
     return `${hours}${amOrPm}`;
 }
+
+function getHour(date) {
+    return dayjs(date).format("DD MMM HH:mm");
+  }
+
     let arr = []
     for (let i = 0; i < 5; i++) {
         let datas = data.daily[i].summary
@@ -47,13 +53,31 @@ function unixTimestampToTime(timestamp) {
             ></HourlyBlock>
         )
     }
+    
+
+    console.log(hrdata)
+    console.log('this is', hrdata.hourly.time[0])
+    let hrArr = []
+    for(let j = 0; j<150; j++) {
+        hrArr.push(
+            <HourlyBlock 
+            day={getHour(hrdata.hourly.time[j])}
+            icon={hrdata.hourly.weather_code[j]} 
+            summary={hrdata.hourly.temperature_2m[j]}
+            ></HourlyBlock>
+
+        )
+    }
+
+
   return (
     <>
 
 <div style={{ position: 'relative', display: 'inline-block' }}>
-    <img src={process.env.PUBLIC_URL + `/icons/opacity-bg.svg`}/>
-    <div className='Daily-Parent' style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-        {arr}
+    
+    <div className='Daily-Parent'>
+        {/*arr*/}
+        {hrArr}
     </div>
 </div>
 

@@ -10,7 +10,7 @@ import CurrentWeather from './components/current-weather/current-weather';
 import Forecast from './components/forecast/forecast';
 import Extras from './components/extras/Extras';
 import BookmarkPage from './BookmarkPage';
-import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY } from "./api";
+import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api";
 import DailyBreakDown from './DailyBreakDown';
 import Wind from './Wind';
 import Sunrise from './Sunrise';
@@ -30,6 +30,9 @@ function App() {
     
     const [ActiveIndex, SetActiveIndex] = useState(0)
     const [currentWeather, setCurrentWeather] = useState(null);
+    
+    const [HourlyWeather, setHourlyWeather] = useState(null);
+
     const [isOpen, setIsOpen] = useState(false);
     const [settings, setSettings] = useState({ suntimes: false, winddir: false, uvi: false, Farenhight: false});
 
@@ -40,7 +43,7 @@ function App() {
 
     useEffect(() => {
         // Fetch weather data for London when the component mounts
-        handleOnSearchChange({ value: "51.5074 -0.1278", label: "London, UK" });
+        handleOnSearchChange({ value: "51.5074 -0.1278", label: "London, GB" });
     }, []);
 
 
@@ -58,6 +61,16 @@ function App() {
                 setCurrentWeather({ city: searchData.label, ...weatherResponse });
             })
             .catch((err) => console.log(err));
+
+        const HourlyWeatherFetch = fetch(`https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&hourly=temperature_2m,weather_code`);
+
+        Promise.all([HourlyWeatherFetch])
+            .then(async (response) => {
+                const weatherHourlyResponse = await response[0].json();
+                setHourlyWeather({ city: searchData.label, ...weatherHourlyResponse });
+            })
+            .catch((err) => console.log(err));
+        
     };
 
     const toggleSettingsOverlay = () => {
@@ -137,6 +150,8 @@ function App() {
     };
 
 
+    console.log('hoy',HourlyWeather)
+
     return (
 <>      <div className='Search-And-Settings'>
             <div className='search'>
@@ -161,7 +176,7 @@ function App() {
             {currentWeather && <Forecast data={currentWeather} test ={SetActiveIndex}/>}
             
             <div className="mobile-toggle">
-                {currentWeather && <DailyBreakDown data={currentWeather}/>}
+                {currentWeather && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather}/>}
                 
             </div>
             

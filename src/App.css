@@ -36,8 +36,9 @@ body.settings-open .App {
   justify-content: flex-start;
   width: 100vw;
   flex-wrap: wrap;
-  overflow-x: hidden;
-  justify-content: center;
+  overflow-x: scroll;
+  
+  /*justify-content: center;/*
 }
 
 .App-header {

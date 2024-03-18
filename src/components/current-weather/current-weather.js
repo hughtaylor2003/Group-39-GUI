@@ -31,12 +31,11 @@ const CurrentWeather = ({ data }) => {
     return (
         <div className="weather">
             <div className="top">
-                <img src=""></img>
                 <div className="top-left">
                     <p className="city">{data.city}</p>
                     <p className="weather-description">{data.current.weather[0].description}</p>
                 </div>
-                <img alt="weather" className="weather=icon" src={`/icons/${data.current.weather[0].icon}.png`} />
+                <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + `/icons/${data.current.weather[0].icon}.png`} />
             </div>
             <div className="bottom">
                 <div className="bottom-left">

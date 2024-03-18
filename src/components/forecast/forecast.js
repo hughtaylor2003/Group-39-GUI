@@ -17,6 +17,7 @@ const Forecast = ({ data, ActiveIndex, test}) => {
     let arr = []
 
     for (let i = 0; i < 7; i++) {
+        console.log(data.daily[i].weather[0].icon)
         arr.push(
             <DailyBlock 
             day={unixTimestampToDay(data.daily[i].dt)}

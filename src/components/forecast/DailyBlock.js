@@ -4,7 +4,7 @@ import './DailyBlock.css'
 
 export default function DailyBlock({day,icon, summary, ActiveIndex, index, test}) {
   return (
-        <div className='Block' onClick={() => ActiveIndex != index ? test(index): null}>
+        <div className='Block' onClick={() => ActiveIndex !== index ? test(index): null}>
           <div className='Inner-Parent'>
           <div>{day}</div>
         <div className='Icon-And-Temp'> 

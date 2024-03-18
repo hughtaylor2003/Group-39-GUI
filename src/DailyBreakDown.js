@@ -8,14 +8,14 @@ export default function DailyBreakDown({data, hrdata}) {
     // Function to convert Unix timestamp to time in "hh:mm am/pm" format
 function unixTimestampToTime(timestamp) {
     // Convert Unix timestamp to milliseconds
-    const milliseconds = timestamp * 1000;
+    const milliseconds = (data.timezone_offset + timestamp) * 1000;
 
     // Create a new Date object with the milliseconds
     const date = new Date(milliseconds);
 
     // Get hours and minutes
     let hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+
 
     // Determine if it's AM or PM
     const amOrPm = hours >= 12 ? 'pm' : 'am';
@@ -44,12 +44,11 @@ function getHour(date) {
 
     let arr = []
     for (let i = 0; i < 5; i++) {
-        let datas = data.daily[i].summary
         arr.push(
             <HourlyBlock 
             day={unixTimestampToTime(data.hourly[i].dt)}
             icon={data.hourly[i].weather[0].icon} 
-            summary={data.hourly[i].temp}
+            summary={Math.round(data.hourly[i].temp)}
             ></HourlyBlock>
         )
     }
@@ -74,10 +73,12 @@ function getHour(date) {
     <>
 
 <div style={{ position: 'relative', display: 'inline-block' }}>
+
     
     <div className='Daily-Parent'>
         {/*arr*/}
         {hrArr}
+
     </div>
 </div>
 

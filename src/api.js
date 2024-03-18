@@ -1,4 +1,4 @@
-{/*************Open Weather API***************/}
+/*************Open Weather API***************/
 
 export const OPEN_WEATHER_URL = 'https://api.openweathermap.org/data/3.0';
 export const OPEN_WEATHER_KEY = '1648041e6f58356be2fc481bbf3e2e93';
@@ -11,7 +11,7 @@ export const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast?'
 
 
 
-{/*************GEO API***************/}
+/*************GEO API***************/
 export const geoAPIOptions = {
         method: 'GET',
         types: 'CITY',

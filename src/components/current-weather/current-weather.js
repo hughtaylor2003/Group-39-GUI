@@ -19,7 +19,6 @@ const CurrentWeather = ({ data }) => {
             <div className="TopHalf">
                 <div className ="mainContent"> 
                     <div className="top">
-
                         <div className="top-left">
                             <p className="city">{data.city}</p>
                             <p className="weather-description">{data.current.weather[0].description}</p>

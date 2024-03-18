@@ -2,7 +2,7 @@
 import React, { useState} from 'react';
 import './Settings.css'; // Importing the CSS file
 
-export default function Settings({ isOpen, isClosed, onSubmit }) {
+export default function Settings({ isOpen, onSubmit }) {
   const [suntimes, setsuntimes] = useState(false);
   const [winddir, setwindir] = useState(false);
   const [uvi, setuvi] = useState(false);
@@ -12,9 +12,7 @@ export default function Settings({ isOpen, isClosed, onSubmit }) {
     onSubmit({ suntimes, winddir, uvi, Farenhight});
   };
 
-  const handleBackButtonClick = () => {
-    isClosed();
-  }
+
 
   return (
     <>

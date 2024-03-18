@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 
 
 import './App.css'; // Importing CSS file
@@ -47,7 +47,7 @@ function App() {
     }, []);
 
 
-    {/* Takes values from the city predicter (latitude and longitude*/ }
+    /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
 
         const [lat, lon] = searchData.value.split(" ");
@@ -157,7 +157,8 @@ function App() {
             <div className='search'>
                 <Search onSearchChange={handleOnSearchChange} />
             </div>
-            <img onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
+
+            <img alt ="icon" onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
             <div>
                 {/*
                 <button onClick={toggleSettingsOverlay}>Open Settings Page</button>
@@ -166,6 +167,7 @@ function App() {
                 <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
                 <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
+
 
             </div>
         </div>

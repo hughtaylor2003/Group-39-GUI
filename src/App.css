@@ -18,6 +18,9 @@ body{
   height:auto;
   background-repeat:space;
   color:whitesmoke;
+
+  
+  background-attachment: fixed;
 }
 
 .App {
@@ -36,8 +39,9 @@ body.settings-open .App {
   justify-content: flex-start;
   width: 100vw;
   flex-wrap: wrap;
-  overflow-x: hidden;
-  justify-content: center;
+  overflow-x: scroll;
+  
+  /*justify-content: center;/*
 }
 
 .App-header {
@@ -88,7 +92,7 @@ body.settings-open .App {
 
 
   ::-webkit-scrollbar {
-    display: none;
+    /*display: none;*/
 }
 
 .weather-card {

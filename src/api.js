@@ -5,9 +5,8 @@ export const OPEN_WEATHER_KEY = '1648041e6f58356be2fc481bbf3e2e93';
 
 
 
-
-
-
+{/*************Open Meteo API ****************/}
+export const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast?'
 
 
 

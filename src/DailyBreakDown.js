@@ -42,7 +42,7 @@ function unixTimestampToTime(timestamp) {
             <HourlyBlock 
             day={unixTimestampToTime(data.hourly[i].dt)}
             icon={data.hourly[i].weather[0].icon} 
-            summary={data.hourly[i].temp}
+            summary={Math.round(data.hourly[i].temp)}
             ></HourlyBlock>
         )
     }

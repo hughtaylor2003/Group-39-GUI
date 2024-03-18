@@ -19,7 +19,7 @@ const Forecast = ({ data }) => {
             key={i} // Use i as the key
             day={unixTimestampToDay(dailyData.dt)}
             icon={dailyData.weather[0].icon.toString()} 
-            summary={dailyData.temp['day']}
+            summary={Math.round(dailyData.temp['day'])}
         />
     ));
 

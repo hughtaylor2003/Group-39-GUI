@@ -19,7 +19,7 @@ export default function DailyBlock({day,icon, summary}) {
           }
             onError = {handleImageError}
           />
-          <div>{Number(summary)}°C</div>
+          <div>{summary}°C</div>
         </div>
         </div>
       </div>

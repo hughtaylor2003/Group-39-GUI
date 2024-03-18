@@ -7,7 +7,7 @@ export default function DailyBreakDown({data}) {
     // Function to convert Unix timestamp to time in "hh:mm am/pm" format
 function unixTimestampToTime(timestamp) {
     // Convert Unix timestamp to milliseconds
-    const milliseconds = timestamp * 1000;
+    const milliseconds = (data.timezone_offset + timestamp) * 1000;
 
     // Create a new Date object with the milliseconds
     const date = new Date(milliseconds);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 
 
 import './App.css'; // Importing CSS file
@@ -15,9 +15,7 @@ import Sunrise from './Sunrise';
 
 function App() {
 
-    const toggleOverlay = () => {
-        setIsOpen(!isOpen);
-      };
+    
 
     const handleSettingsSubmit = (newSettings) => {
         setSettings(newSettings);
@@ -35,7 +33,7 @@ function App() {
     }, []);
 
 
-    {/* Takes values from the city predicter (latitude and longitude*/ }
+    /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
 
         const [lat, lon] = searchData.value.split(" ");
@@ -56,7 +54,11 @@ function App() {
                 <div className='search'>
             <Search onSearchChange={handleOnSearchChange} />
             </div>
-            <img onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
+            <img
+                alt="icon"
+                className="settings" 
+                src={process.env.PUBLIC_URL + `/icons/settings.png`}>
+                </img>
             </div>
             {currentWeather && <CurrentWeather data={currentWeather} />}
             {currentWeather && <Forecast data={currentWeather}/>}

@@ -12,9 +12,7 @@ export default function Settings({ isOpen, isClosed, onSubmit }) {
     onSubmit({ suntimes, winddir, uvi, Farenhight});
   };
 
-  const handleBackButtonClick = () => {
-    isClosed();
-  }
+
 
   return (
     <>

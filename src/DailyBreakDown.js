@@ -14,7 +14,7 @@ function unixTimestampToTime(timestamp) {
 
     // Get hours and minutes
     let hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+
 
     // Determine if it's AM or PM
     const amOrPm = hours >= 12 ? 'pm' : 'am';
@@ -38,7 +38,6 @@ function unixTimestampToTime(timestamp) {
 }
     let arr = []
     for (let i = 0; i < 5; i++) {
-        let datas = data.daily[i].summary
         arr.push(
             <HourlyBlock 
             day={unixTimestampToTime(data.hourly[i].dt)}
@@ -51,8 +50,12 @@ function unixTimestampToTime(timestamp) {
     <>
 
 <div style={{ position: 'relative', display: 'inline-block' }}>
-    <img src={process.env.PUBLIC_URL + `/icons/opacity-bg.svg`}/>
-    <div className='Daily-Parent' style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+    <img
+        alt="opacity" 
+        src={process.env.PUBLIC_URL + `/icons/opacity-bg.svg`}/>
+    <div 
+        className='Daily-Parent' 
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
         {arr}
     </div>
 </div>

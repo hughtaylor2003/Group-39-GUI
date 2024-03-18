@@ -15,7 +15,9 @@ import Sunrise from './Sunrise';
 
 function App() {
 
-    
+    const toggleOverlay = () => {
+        setIsOpen(!isOpen);
+      };
 
     const handleSettingsSubmit = (newSettings) => {
         setSettings(newSettings);
@@ -57,7 +59,8 @@ function App() {
             <img
                 alt="icon"
                 className="settings" 
-                src={process.env.PUBLIC_URL + `/icons/settings.png`}>
+                src={process.env.PUBLIC_URL + `/icons/settings.png`}
+                onClick={toggleOverlay}>
                 </img>
             </div>
             {currentWeather && <CurrentWeather data={currentWeather} />}

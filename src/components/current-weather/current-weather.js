@@ -1,7 +1,7 @@
 import "./current-weather.css"
 
 
-const CurrentWeather = ({ data }) => {
+const CurrentWeather = ({ data, settings }) => {
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
     const today = new Date();
@@ -10,8 +10,27 @@ const CurrentWeather = ({ data }) => {
 
 
     const currDate = date + ' ' + months[month];
-    const currTime = new Date().toLocaleTimeString();
- 
+    const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    let adviceString = '';
+    if (settings.Farenhight === false){
+        if (data.current.temp > 24){
+            adviceString += 'Bring lots of water to stay hydrated. Have cooling stations along with cold pack and set up water breaks.'
+        }
+
+        if (data.current.temp < 13){
+            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable'
+        }
+    }
+    else{
+        if (data.current.temp > 75){
+            adviceString += 'Bring lots of water to stay hydrated. Have cooling stations along with cold pack and set up areas for shade to avoid direct sunlight '
+        }
+
+        if (data.current.temp < 55){
+            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable'
+        }
+    }
 
 
     return (
@@ -58,7 +77,7 @@ const CurrentWeather = ({ data }) => {
                     </div>
 
                     <div className="FeelSlot">   
-                        <img className="small-icon" src={process.env.PUBLIC_URL + '/icons/wi_thermometer.svg'} />
+                        <img className="small-icon" src={process.env.PUBLIC_URL + '/icons/wi_wind.svg'} />
                         <div className="Data">
                             <div >   
                                 Wind
@@ -83,13 +102,13 @@ const CurrentWeather = ({ data }) => {
                     </div>
 
                     <div className="FeelSlot">   
-                        <img className="small-icon" src={process.env.PUBLIC_URL + '/icons/wi_thermometer.svg'} />
+                        <img className="small-icon" src={process.env.PUBLIC_URL + '/icons/wi_dust-day.svg'} />
                         <div className="Data">
                             <div>   
                                 Visibility
                             </div>
                             <div>
-                               8.2
+                            {`${Math.round(data.current.visibility)/1000} km`}
                             </div>
                         </div>
                     </div>
@@ -99,9 +118,8 @@ const CurrentWeather = ({ data }) => {
             <div>
                 Alerts and Advice
             </div>
-            <div>
-                Recommend rain-proof equipment or rain-proof covers for equipment.
-                Make sure to bring heating packs to keep hands warm. 
+            <div> 
+                {adviceString}
             </div>
         </div>
 

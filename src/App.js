@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 
 
 import './App.css'; // Importing CSS file
@@ -12,9 +12,7 @@ import Extras from './components/extras/Extras';
 import BookmarkPage from './BookmarkPage';
 import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api";
 import DailyBreakDown from './DailyBreakDown';
-import Wind from './Wind';
-import Sunrise from './Sunrise';
-
+import { clear } from '@testing-library/user-event/dist/clear';
 
 function App() {
 
@@ -30,16 +28,23 @@ function App() {
     
     const [ActiveIndex, SetActiveIndex] = useState(0)
     const [currentWeather, setCurrentWeather] = useState(null);
-    
     const [HourlyWeather, setHourlyWeather] = useState(null);
-
     const [isOpen, setIsOpen] = useState(false);
     const [settings, setSettings] = useState({ suntimes: false, winddir: false, uvi: false, Farenhight: false});
-
     const [bookmarks, setBookmarks] = useState([]);
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    const [refresh] = useState(false);
+    
+    let tempUnitMap = 'metric'
+    let tempUnitMeteo = ''
+    if (settings.Farenhight === true){
+        tempUnitMap = 'imperial' 
+        tempUnitMeteo = '&temperature_unit=fahrenheit'
+    }
+    else{
+        tempUnitMap = 'metric' 
+        tempUnitMeteo = ''
+    }
 
     useEffect(() => {
         // Fetch weather data for London when the component mounts
@@ -52,9 +57,8 @@ function App() {
 
         const [lat, lon] = searchData.value.split(" ");
 
-        const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=metric`);
+        const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
 
-        console.log(currentWeather)
         Promise.all([currentWeatherFetch])
             .then(async (response) => {
                 const weatherResponse = await response[0].json();
@@ -62,7 +66,7 @@ function App() {
             })
             .catch((err) => console.log(err));
 
-        const HourlyWeatherFetch = fetch(`https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&hourly=temperature_2m,weather_code`);
+        const HourlyWeatherFetch = fetch(`${OPEN_METEO_URL}latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code${tempUnitMeteo}`);
 
         Promise.all([HourlyWeatherFetch])
             .then(async (response) => {
@@ -81,19 +85,10 @@ function App() {
         setIsBookmarkPageOpen(!isBookmarkPageOpen);
     };
 
-
-    useEffect(() => {
-        if (!isSettingsOpen && !isBookmarkPageOpen) {
-            refreshForecast();
-        }
-    }, [isSettingsOpen, isBookmarkPageOpen]);
-
-
     const bookmarkLocation = async () => {
-    
         const { city, lat, lon } = currentWeather;
         try {
-            const response = await axios.get(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=metric`);
+            const response = await axios.get(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
             const temperature = response.data.current.temp;
             const description = response.data.current.weather[0].description;
             // Check if the city is already in the list
@@ -113,7 +108,6 @@ function App() {
         } catch (error) {
             console.error(`Error fetching weather data for ${city}: ${error.message}`);
         }
-        refreshForecast();
     };
 
     
@@ -131,27 +125,56 @@ function App() {
         handleOnSearchChange(bookmark);
     }
 
-    
-
-    const refreshForecast = async () => {
-        console.log("Button clicked, refreshing...");
-       // await fetchData(); // Fetch fresh data
-    };
-
-    const fetchData = async () => {
-        try {
-            const location = currentWeather.city
-            const response = await fetch(`${OPEN_WEATHER_URL}/onecall?lat=${currentWeather.lat}&lon=${currentWeather.lon}&appid=${OPEN_WEATHER_KEY}&units=metric`);
-            const data = await response.json();
-            setCurrentWeather({city: location,...data}); // Update current weather data
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+    const clearStorage = ()=>{
+        localStorage.clear();
+        setBookmarks([])
+    }
 
 
-    console.log('hoy',HourlyWeather)
 
+    const getWeatherIcon = (code) => {
+        const weatherCodes = {
+            /*Clouds*/
+            0: "01",
+            1: "02",
+            2:'03',
+            3:'04',
+            /*Fog*/
+            45:'50',
+            48:'50',
+            /*Drizzle*/
+            51:'09',
+            53:'09',
+            55:'09',
+            56:'09',
+            57:'09',
+            /*Rain*/
+            61:'10',
+            63:'10',
+            65:'10',
+            66:'10',
+            67:'10',
+            /*Snow*/
+            71:'13',
+            73:'13',
+            75:'13',
+            77:'13',
+            /*Rain*/
+            80:'10',
+            81:'10',
+            82:'10',
+            /*Snow*/
+            85:'13',
+            86:'13',
+            /*Thunder*/
+            95:'11',
+            96:'11',
+            99:'11',
+        };
+        return weatherCodes[code] || "unknown"; // Default to "unknown" if code not found
+      };
+      
+      
     return (
 <>      <div className='Search-And-Settings'>
             <div className='search'>
@@ -159,33 +182,26 @@ function App() {
             </div>
 
             <img alt ="icon" onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
-            <div>
-                {/*
-                <button onClick={toggleSettingsOverlay}>Open Settings Page</button>
-                <Settings isOpen={isSettingsOpen} isClosed={() => setIsSettingsOpen(false)} onSubmit={handleSettingsSubmit}/>
-                */}
+            
+        </div>
+        <div className ='Bookmark-Section'>
                 <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
                 <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
-
-
-            </div>
+                <button onClick={clearStorage}>Clear bookmarks</button>
         </div>
-
         
             
-            {currentWeather && <CurrentWeather data={currentWeather} />}
-            {currentWeather && <Forecast data={currentWeather} test ={SetActiveIndex}/>}
+            {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
+            
             
             <div className="mobile-toggle">
-                {currentWeather && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather}/>}
-                
+                {currentWeather && HourlyWeather !== null && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
             </div>
-            
+            {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} test ={SetActiveIndex}/>}
             {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
             </>
-        
         );
 }
 

@@ -10,7 +10,9 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
             const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
             if (storedBookmarks) {
                 setBookmarks(storedBookmarks);
-             
+            }
+            else{
+                setBookmarks([]);
             }
         }
     }, [isOpen]);
@@ -24,21 +26,26 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
         <>
         
             {isOpen && (
+                <div className='bookmark-overlay'>
                 <div className="bookmarks-container">
                     <h2>Bookmarks:</h2>
+                    <div className='bookmark-list'>
                     {bookmarks.map((bookmark, index) => (
                         <div key={index}>
-                            <div className='bookmarkValue' onClick={()=> viewBookmark(bookmark)}>
-                            
+                            <div className='bookmark-value' onClick={()=> viewBookmark(bookmark)}>
+
                                 <p>{bookmark.city}</p>
                                 <p>Temperature: {bookmark.temperature}°C</p>
+
                                 <p>{bookmark.description}</p>
                             </div>
                         </div>
                     ))}
-                    <button onClick={onClose}>Close</button>
+                    </div>
                 </div>
-            )}
-        </>
+                <button className='close-button' onClick={onClose}>Close</button>
+            </div>
+        )}
+    </>
     );
 }

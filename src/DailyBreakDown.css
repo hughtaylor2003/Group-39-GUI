@@ -6,5 +6,6 @@
     align-items: center;
     height:300px;
     overflow:hidden;
+    gap: .5em;
 }
 

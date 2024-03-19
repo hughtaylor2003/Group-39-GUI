@@ -1,51 +1,74 @@
 /* bookmarkPage.css */
 .bookmarks-container {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 300px;
-    margin: auto;
-  
-    /*Added by Jason: Fix stuff to the middle and span the settings page to whole screen */
-    background-color: rgb(200, 252, 255, 1);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    z-index: 10;
-    padding: 20px;
-    width: fit-content;
-    height: fit-content;
-    width: 100vw;
-    height: 100vw;
-    color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*
+  justify-content: center;
+  */
+  text-align: center;
+  width: 300px;
+  border-radius: 15%;
+  /* Center the box in the middle of the screen */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Additional styling */
+  background-color: rgba(200, 252, 255, 0.8); /* Use rgba for transparency */
+  z-index: 10;
+  padding: 20px;
 
-    overflow-y: scroll;
 
-    /*Check proper*/
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
+  min-width: fit-content;
+  min-height: fit-content;
+  max-height: 80vh;
+  color: black;
+  overflow-y: auto;
+}
 
-  .bookmarks-container::-webkit-scrollbar {
-    display: default;
-  }
-  
-  .bookmarks-container div {
-    margin-bottom: 10px;
-  }
-  
-  .bookmarks-container button {
-    margin-top: 20px;
-  }
-  
-  
+
+.bookmark-value{
+  border: 2px solid black;
+  border-color: black;
+  background-color: rgba(27, 180, 201, 0.644);
+  border-radius: 12%;
+}
+
+
+.close-button{
+  position: absolute;
+  top: 20%;
+  left: 70%;
+  background-color: rgba(27, 180, 201, 0.644);
+}
+
+.bookmark-value:hover {
+  background-color: rgba(27, 180, 201, 1);
+}
+
+.bookmarks-container::-webkit-scrollbar {
+  display: default;
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.bookmarks-container div {
+  margin-bottom: 10px;
+}
+
+.bookmarks-container button {
+  margin-top: 20px;
+}
+
+
+.bookmark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust transparency as needed */
+  backdrop-filter: blur(10px); /* Apply a blur effect */
+  z-index: 5; /* Ensure the overlay is behind the settings container */
+}

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({});
 const PDFForecast = ({WeatherData}) => {
  return(
     <Document>
-        <Page>
+        <Page size="A4">
             <View>
                {WeatherData && <PDFCurrentWeather data ={WeatherData}></PDFCurrentWeather>}
             </View>

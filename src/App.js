@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-
-
+import axios from 'axios';
 import './App.css'; // Importing CSS file
 
 import Settings from './components/Settings';
@@ -15,9 +14,7 @@ import DailyBreakDown from './DailyBreakDown';
 import Wind from './Wind';
 import Sunrise from './Sunrise';
 
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFForecast from './components/PDFForecast';
-import generatePDF from './components/generatePDF';
 import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
 
@@ -195,9 +192,8 @@ function App() {
             
             <div className="mobile-toggle">
                 {currentWeather && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather}/>}
-                {currentWeather &&  <button onClick={() => downloadPDF()}> Download</button>}
             </div>
-            
+            {currentWeather &&  <button onClick={() => downloadPDF()}> Download</button>}
             {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
             </>

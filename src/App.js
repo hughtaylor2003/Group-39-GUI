@@ -14,6 +14,7 @@ import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api";
 import DailyBreakDown from './DailyBreakDown';
 import Wind from './Wind';
 import Sunrise from './Sunrise';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 
 function App() {
@@ -81,14 +82,6 @@ function App() {
         setIsBookmarkPageOpen(!isBookmarkPageOpen);
     };
 
-
-    useEffect(() => {
-        if (!isSettingsOpen && !isBookmarkPageOpen) {
-            refreshForecast();
-        }
-    }, [isSettingsOpen, isBookmarkPageOpen]);
-
-
     const bookmarkLocation = async () => {
     
         const { city, lat, lon } = currentWeather;
@@ -113,9 +106,8 @@ function App() {
         } catch (error) {
             console.error(`Error fetching weather data for ${city}: ${error.message}`);
         }
-        refreshForecast();
-    };
 
+    };
     
     useEffect(() => {
         const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
@@ -131,12 +123,12 @@ function App() {
         handleOnSearchChange(bookmark);
     }
 
-    
 
-    const refreshForecast = async () => {
-        console.log("Button clicked, refreshing...");
-       // await fetchData(); // Fetch fresh data
-    };
+
+    const clearStorage = ()=>{
+        localStorage.clear();
+       
+    }
 
     const fetchData = async () => {
         try {
@@ -167,6 +159,7 @@ function App() {
                 <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
                 <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
+                <button onClick={clearStorage}>Clear bookmarks</button>
 
 
             </div>

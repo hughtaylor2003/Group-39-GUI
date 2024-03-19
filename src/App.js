@@ -28,16 +28,7 @@ function App() {
         setIsOpen(!isOpen);
       };
 
-    const getPDFDownload = () => {
-        if(currentWeather != null)
-         { return (
-          <PDFDownloadLink document={<PDFForecast WeatherData={currentWeather}/>} fileName="Forecast">
-          {({loading}) => (loading ? (<button>Loading</button>) : (<button>Download</button>))}
-          </PDFDownloadLink>)
-        }
-         
-    }
-
+//save pdf locally to be able to download it from button
     const downloadPDF = async() => {
         const blob = await pdf((
             <PDFForecast 

@@ -1,9 +1,17 @@
 .weather {
-    width: 300px;
+    width: 40vw;
+    max-width: 600px;
+    min-width: 580px;
+
     border-radius: 6px;
     color: white;
     margin: -20px auto 0 auto;
     padding: 5px 20px 10px 20px;
+    background-color: rgb(51, 51, 51,0.4);/*#333333*/
+
+    display:flex;
+    gap:1rem;
+    flex-direction: column;
 }
 
 
@@ -20,8 +28,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    padding-top: 10px;
 }
+
 .top-left {
     justify-content: left;
 }
@@ -82,4 +91,81 @@
 
 .parameter-label.top {
     font-weight: 800;
+}
+
+.NewContent{
+    display: grid;
+
+    margin-top: 0.8rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 0rem;
+    box-sizing: border-box;
+}
+
+.mainContent{
+    width: 18.75rem;
+    border-right:1px solid #ffffff56;
+    padding-right: 1.9vw;
+    display: flex;
+    
+    flex-direction: column;
+    justify-content:space-between
+}
+
+.FeelSlot{
+    display: flex;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    
+}
+
+.TopHalf{
+    display: flex;
+    gap:1rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffffff56;
+}
+
+.small-icon{
+    
+    height:85px;
+    
+}
+.Data{
+    font-size: 12px;
+    align-self: center;
+    
+}
+@media only screen and (max-width: 630px){
+    .weather {
+        grid-template-columns: repeat(2, minmax(9rem, 1fr));
+        width: 80vw;
+        min-width: 250px;
+        }
+    .TopHalf {
+        flex-direction: column;
+    }
+    .mainContent {
+        width:80vw;
+        border-right:0;
+        border-bottom:1px solid #ffffff56;
+    }
+
+    .small-icon{
+        height:5.625rem;
+        width:9rem;
+        
+    }
+
+
+}
+
+
+@media only screen and (max-width: 500px){
+    .small-icon{
+        height:5.625rem;
+        width:5rem;
+        
+    }
+
 }

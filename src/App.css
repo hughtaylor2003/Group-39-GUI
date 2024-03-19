@@ -9,12 +9,18 @@
   display: flex;
   justify-content: flex-start;
   width: 200vw;
+
 }
 
 body{
   background: rgb(255,220,124);
   background: linear-gradient(0deg, rgba(255,220,124,1) 0%, rgba(119,245,255,1) 100%);
+  height:auto;
+  background-repeat:space;
   color:whitesmoke;
+
+  
+  background-attachment: fixed;
 }
 
 .App {
@@ -33,8 +39,9 @@ body.settings-open .App {
   justify-content: flex-start;
   width: 100vw;
   flex-wrap: wrap;
-  overflow-x: hidden;
-  justify-content: center;
+  overflow-x: scroll;
+  
+  /*justify-content: center;/*
 }
 
 .App-header {
@@ -85,7 +92,7 @@ body.settings-open .App {
 
 
   ::-webkit-scrollbar {
-    display: none;
+    /*display: none;*/
 }
 
 .weather-card {

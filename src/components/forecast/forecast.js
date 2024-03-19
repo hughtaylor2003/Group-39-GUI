@@ -1,9 +1,9 @@
 import './forecast.css';
 import DailyBlock from './DailyBlock';
 
-const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const Forecast = ({ data }) => {
+
+const Forecast = ({ data, ActiveIndex, test}) => {
 
 
     function unixTimestampToDay(timestamp) {
@@ -14,17 +14,20 @@ const Forecast = ({ data }) => {
         return days[dayOfWeek];
     }
     
-    let arr = []
 
-    for (let i = 0; i < 7; i++) {
-        arr.push(
-            <DailyBlock 
-            day={unixTimestampToDay(data.daily[i].dt)}
-            icon={data.daily[i].weather[0].icon} 
-            summary={data.daily[i].temp['day']}
-            ></DailyBlock>
-        )
-    }
+    const arr = data.daily.slice(0, 7).map((dailyData, i) => (
+        <DailyBlock 
+            key={i} // Use i as the key
+            day={unixTimestampToDay(dailyData.dt)}
+            icon={dailyData.weather[0].icon.toString()} 
+            summary={Math.round(dailyData.temp['day'])}
+            ActiveIndex = {ActiveIndex}
+            index ={i}
+            test = {test}
+        />
+    ));
+
+    
 
     return (
         <>

@@ -7,9 +7,16 @@ export default function Settings({ isOpen, onSubmit }) {
   const [winddir, setwindir] = useState(false);
   const [uvi, setuvi] = useState(false);
   const [Farenhight, setFarenhight] = useState(false);
-  
+
+  const [humidity, sethumidity] = useState(false);
+  const [windspeed, setwindspeed] = useState(false);
+  const [pop, setpop] = useState(false);
+  const [rain, setrain] = useState(false);
+  const [temp, settemp] = useState(false);
+
+
   const handleSubmit = () => {
-    onSubmit({ suntimes, winddir, uvi, Farenhight});
+    onSubmit({ suntimes, winddir, uvi, Farenhight, humidity, windspeed, pop, rain, temp});
   };
 
 
@@ -22,7 +29,7 @@ export default function Settings({ isOpen, onSubmit }) {
        <div>
          <label>
            <input type="checkbox" checked={suntimes} onChange={() => setsuntimes(!suntimes)} />
-           Show Sunrise
+           Show Suntimes
          </label>
        </div>
        <div>
@@ -43,6 +50,43 @@ export default function Settings({ isOpen, onSubmit }) {
            Farenhight
          </label>
        </div>
+
+       <div>
+         <label>
+           <input type="checkbox" checked={humidity} onChange={() => sethumidity(!humidity)} />
+           Show Humidity 
+         </label>
+       </div>
+
+       <div>
+         <label>
+           <input type="checkbox" checked={windspeed} onChange={() => setwindspeed(!windspeed)} />
+           Show Wind Speed 
+         </label>
+       </div>
+
+       <div>
+         <label>
+           <input type="checkbox" checked={pop} onChange={() => setpop(!pop)} />
+           Show Probability Of Precipitation
+         </label>
+       </div>
+
+       <div>
+         <label>
+           <input type="checkbox" checked={rain} onChange={() => setrain(!rain)} />
+           Show Total Precipitation
+         </label>
+       </div>
+
+       <div>
+         <label>
+           <input type="checkbox" checked={temp} onChange={() => settemp(!temp)} />
+           Show Max And Min Temperature 
+         </label>
+       </div>
+
+
        <button onClick={handleSubmit}>Submit</button>
      </div>
      </div>

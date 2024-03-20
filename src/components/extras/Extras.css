@@ -14,7 +14,7 @@
 .Panel-widgets{
     margin-top: 1.2rem;
     display: grid;
-    grid-template-columns: repeat(4, minmax(12rem, 1fr));
+    grid-template-columns: repeat(5, minmax(12rem, 1fr));
     grid-auto-rows: 1fr;
     grid-gap: 1rem;
     gap: 1rem;
@@ -56,7 +56,6 @@
 }
 .Sun-Icon{
     width:30%;
-    
     width: clamp(3rem, 20vw, 8rem);
 }
 
@@ -66,7 +65,7 @@
 
 
 .Arrow{
-    width: clamp(3rem, 20vw, 8rem);
+    width: clamp(3rem, 20vw, 5.5rem);
 
 }
 

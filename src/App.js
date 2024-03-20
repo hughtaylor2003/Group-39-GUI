@@ -30,7 +30,7 @@ function App() {
     const [currentWeather, setCurrentWeather] = useState(null);
     const [HourlyWeather, setHourlyWeather] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [settings, setSettings] = useState({ suntimes: false, winddir: false, uvi: false, Farenhight: false});
+    const [settings, setSettings] = useState({suntimes: false, winddir: false, uvi: false, Farenhight: false, humidity: false, windspeed: false, pop: false, rain:false, temp:false });
     const [bookmarks, setBookmarks] = useState([]);
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -172,8 +172,17 @@ function App() {
             99:'11',
         };
         return weatherCodes[code] || "unknown"; // Default to "unknown" if code not found
-      };
+    };
       
+    let renderNoSelected = true; 
+    let count = Object.values(settings).reduce((a, settings) => a + settings, 0)
+    
+    if(count > 0){
+        renderNoSelected = false;
+    }
+    else{
+        renderNoSelected = true;
+    }
       
     return (
 <>      <div className='Search-And-Settings'>
@@ -199,7 +208,7 @@ function App() {
                 {currentWeather && HourlyWeather !== null && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
             </div>
             {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} test ={SetActiveIndex}/>}
-            {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings}/>}
+            {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings} renderNoSelected = {renderNoSelected}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
             </>
         );

@@ -45,21 +45,14 @@ const Extras = ({data, index, settingsOptions}) => {
             <div className ='title'>
             Extra Options for {index === 0 ? 'Today' : forecastDay[index]}
             </div>
-
             <div className="Panel-widgets">
                 <div className='Panel-slot'>
                     <div>Sunrise</div>
-                    
                         <div className="Icon-Content">
-                            
                             <img alt="weather" className="Sun-Icon" src={process.env.PUBLIC_URL + '/icons/sunrise.svg'}/>
-                            
                             <p>{sunriseTime({data, index})}</p>
-                            
                         </div>
-                    
                 </div>
-
                 <div className='Panel-slot'>
                     <div>Sunset</div>
                     <div className="Icon-Content">
@@ -67,7 +60,6 @@ const Extras = ({data, index, settingsOptions}) => {
                         <p>{sunsetTime({data, index})}</p>
                     </div>
                 </div>
-
                 <div className='Panel-slot'>
                     <div>Highest Temp</div>
                     <div className="Icon-Content">
@@ -77,7 +69,6 @@ const Extras = ({data, index, settingsOptions}) => {
                         <p>{data.daily[index].temp.max}</p>
                     </div>
                 </div>
-
                 <div className='Panel-slot'>
                     <div>Lowest Temp</div>
                     <div className="Icon-Content">
@@ -87,7 +78,6 @@ const Extras = ({data, index, settingsOptions}) => {
                         <p>{data.daily[index].temp.min}</p>
                     </div>
                 </div>
-
                 {settingsOptions.uvi && <div className='Panel-slot'>
                     <div>UV Index</div>
                     <div className="Icon-Content">
@@ -97,7 +87,6 @@ const Extras = ({data, index, settingsOptions}) => {
                       
                     </div>
                 </div>}
-
                 {settingsOptions.winddir && <div className='Panel-slot'>
                     <div>Wind Dir</div>
                     <div className="Icon-Content">
@@ -105,10 +94,8 @@ const Extras = ({data, index, settingsOptions}) => {
                             <img style={{rotate:`${deg}deg`}} className="Arrow" src={process.env.PUBLIC_URL + '/icons/arrow.svg'} alt="Sunrise"></img>
                         </div>
                         <h3>{deg}°</h3>
-                      
                     </div>
                 </div>}
-
             </div>
         </div>
             

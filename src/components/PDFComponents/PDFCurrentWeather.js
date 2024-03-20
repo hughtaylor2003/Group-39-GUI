@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     temperature: {
         fontWeight: 600,
-        fontSize: 70,
+        fontSize: 50,
         width: 'auto',
         letterSpacing: 3,
         marginVertical: 0,

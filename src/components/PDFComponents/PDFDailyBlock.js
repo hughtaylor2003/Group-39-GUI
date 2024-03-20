@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View,Font, StyleSheet, Image} from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image} from "@react-pdf/renderer";
 import DailyBlock from "../forecast/DailyBlock";
 
 
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
     /*Text Styling*/ 
     Text:{
-        paddingTop: 5,
+        paddingTop: 2,
         fontFamily:'Roboto',
         color:'white',
     }

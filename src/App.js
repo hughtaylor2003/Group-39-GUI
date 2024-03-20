@@ -34,6 +34,8 @@ function App() {
             <PDFForecast 
              title='Forecast'
              WeatherData={currentWeather}
+             HourWeatherData={HourlyWeather}
+             getWeatherIcon={getWeatherIcon}
              />
         )).toBlob();
         saveAs(blob,'forecast');
@@ -194,26 +196,20 @@ function App() {
             <div className='search'>
                 <Search onSearchChange={handleOnSearchChange} />
             </div>
-
             <img alt ="icon" onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
-            
         </div>
         <div className ='Bookmark-Section'>
                 <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
                 <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
                 <button onClick={clearStorage}>Clear bookmarks</button>
+                {currentWeather && HourlyWeather !== null && <button onClick={() => downloadPDF()}> Download</button>}
         </div>
-        
-            
             {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
-            
-            
             <div className="mobile-toggle">
                 {currentWeather && HourlyWeather !== null && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
             </div>
             {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} test ={SetActiveIndex}/>}
-            {currentWeather &&  <button onClick={() => downloadPDF()}> Download</button>}
             {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
             </>

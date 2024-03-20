@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
 
 })
 
+/*DailyBlock.js but with react-pdf elements: View, Text, Image */
 const PDFDailyBlock = ({day,icon, summary}) => {
     return (
     <View style={styles.Block}>

@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     
 }) 
 
+/*forecast.js but for pdf use -> display the simple information about temperature and weather condition for each day */
 const PDFDays =({data}) => {
 
     function unixTimestampToDay(timestamp) {
@@ -27,6 +28,7 @@ const PDFDays =({data}) => {
         return days[dayOfWeek];
     }
 
+    /*get 7 days of data from the array and display 7 PDFDailyBlock's */
     const arr = data.daily.slice(0, 7).map((dailyData, i) => (
         <PDFDailyBlock 
             key={i} // Use i as the key
@@ -36,6 +38,7 @@ const PDFDays =({data}) => {
         />
     ));
 
+    /*Display the daily blocks array */
     return (
         <>
         <View style={styles.DaysBox}>

@@ -3,17 +3,17 @@ import "./current-weather.css"
 
 const CurrentWeather = ({ data, settings }) => {
 
+    //Section is for date/time
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
     const today = new Date();
     const month = today.getMonth();
     const date = today.getDate();
-    
-
     const currDate = date + ' ' + months[month];
     const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     
     let unit = settings.Farenhight ? 'F' : 'C';
 
+    //Section is for Advice for film crews depending on weather conditions
     let adviceString = '';
     if (settings.Farenhight === false){
         if (data.current.temp > 24){
@@ -41,6 +41,7 @@ const CurrentWeather = ({ data, settings }) => {
     if (adviceString === ''){
         adviceString += 'No alerts or advice needed currently'
     }
+    // End of code for Advice.
 
     return (
         <div className="weather">
@@ -55,20 +56,15 @@ const CurrentWeather = ({ data, settings }) => {
                             <p className="city">{currDate}</p>
                             <p className="weather-description">{currTime}</p>
                         </div>
-                        
                     </div>
                     <div className="bottom">
                         <div className="bottom-left">
                             <p className="temperature">{`${Math.round(data.current.temp)}˚${unit}`}</p>
                         </div>
-
                         <div className="bottom-right">
                             <div className="details">
                                 <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + `/icons/${data.current.weather[0].icon}.png`} />
-                                
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -97,7 +93,6 @@ const CurrentWeather = ({ data, settings }) => {
                             </div>
                         </div>
                     </div>
-
                     <div className="FeelSlot">   
                         <img className="small-icon" src={process.env.PUBLIC_URL + '/icons/humidity.svg'} />
                         <div className="Data">
@@ -123,7 +118,6 @@ const CurrentWeather = ({ data, settings }) => {
                     </div>
                 </div>    
             </div>
-            
             <div>
                 Alerts and Advice
             </div>

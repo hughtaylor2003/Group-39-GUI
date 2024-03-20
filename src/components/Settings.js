@@ -87,7 +87,7 @@ export default function Settings({ isOpen, onSubmit }) {
        </div>
 
 
-       <button onClick={handleSubmit}>Submit</button>
+       <button onClick={handleSubmit}>Save Settings</button>
      </div>
      </div>
     )

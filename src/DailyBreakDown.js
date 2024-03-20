@@ -7,13 +7,12 @@ import * as customParseFormat  from 'dayjs/plugin/customParseFormat';
 dayjs.extend(isBetween);
 dayjs.extend(customParseFormat)
 
-export default function DailyBreakDown({data, hrdata, ActiveIndex, getWeatherIcon}) {
+export default function DailyBreakDown({hrdata, ActiveIndex, getWeatherIcon}) {
 
     function getHour(date) {
         return dayjs(date).format("h A");
     }
 
- 
     let start = ActiveIndex * 24
     let end = start + 24
     let hrArr = []
@@ -22,14 +21,15 @@ export default function DailyBreakDown({data, hrdata, ActiveIndex, getWeatherIco
     let nightTime = dayjs('17:00', 'h A');
 
     for(let j = start; j<end; j++) {
-        // Check if the hour is between 6:00 and 18:00
+        // Check if the hour is between 6:00 and 17:00
         if (dayjs(getHour(hrdata.hourly.time[j]), 'h A').isBetween(dayTime, nightTime, null, '[]')) {
-            iconTime = 'd'; // Set to daytime if between 6:00 and 18:00
+            iconTime = 'd'; // Set to daytime if between 6:00 and 17:00
         } else {
             iconTime = 'n'; // Otherwise, it's nighttime
         }
         hrArr.push(
             <HourlyBlock 
+            key = {j} // use index as key 
             day={getHour(hrdata.hourly.time[j])}
             icon={getWeatherIcon(hrdata.hourly.weather_code[j]) + iconTime} 
             summary={hrdata.hourly.temperature_2m[j]}
@@ -39,16 +39,11 @@ export default function DailyBreakDown({data, hrdata, ActiveIndex, getWeatherIco
     
   return (
     <>
-
-<div style={{ position: 'relative', display: 'inline-block' }}>
-
-    
-    <div className='Daily-Parent'>
-        {/*arr*/}
-        {hrArr}
-
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+        <div className='Daily-Parent'>
+            {hrArr}
+        </div>
     </div>
-</div>
 
     </>
   )

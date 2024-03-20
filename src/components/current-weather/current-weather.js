@@ -7,19 +7,21 @@ const CurrentWeather = ({ data, settings }) => {
     const today = new Date();
     const month = today.getMonth();
     const date = today.getDate();
-
+    
 
     const currDate = date + ' ' + months[month];
     const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     
+    let unit = settings.Farenhight ? 'F' : 'C';
+
     let adviceString = '';
     if (settings.Farenhight === false){
         if (data.current.temp > 24){
-            adviceString += 'Bring lots of water to stay hydrated. Have cooling stations along with cold pack and set up water breaks.'
+            adviceString += 'Bring lots of water to stay hydrated. Have cooling stations along with cold pack and set up water breaks. '
         }
 
-        if (data.current.temp < 13){
-            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable'
+        else if (data.current.temp < 13){
+            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable. '
         }
     }
     else{
@@ -27,11 +29,18 @@ const CurrentWeather = ({ data, settings }) => {
             adviceString += 'Bring lots of water to stay hydrated. Have cooling stations along with cold pack and set up areas for shade to avoid direct sunlight '
         }
 
-        if (data.current.temp < 55){
-            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable'
+        else if (data.current.temp < 55){
+            adviceString += 'Layer up and wear warm clothing. Bring heat packs to warm up hands so handling equipment like cameras is not uncomfortable. '
         }
     }
+    
+    if(data.current.weather[0].icon === '10d' || data.current.weather[0].icon === '10n' || data.current.weather[0].icon === '09n' || data.current.weather[0].icon === '09d'){
+        adviceString += 'Wear waterproof gear and consider bring towels. Use water proof equipment or use protective shields/covers for equipment. '
+    }
 
+    if (adviceString === ''){
+        adviceString += 'No alerts or advice needed currently'
+    }
 
     return (
         <div className="weather">
@@ -50,7 +59,7 @@ const CurrentWeather = ({ data, settings }) => {
                     </div>
                     <div className="bottom">
                         <div className="bottom-left">
-                            <p className="temperature">{`${Math.round(data.current.temp)}˚`}</p>
+                            <p className="temperature">{`${Math.round(data.current.temp)}˚${unit}`}</p>
                         </div>
 
                         <div className="bottom-right">
@@ -71,7 +80,7 @@ const CurrentWeather = ({ data, settings }) => {
                                 Feels Like
                             </div>
                             <div>
-                                {`${Math.round(data.current.feels_like)}˚C`}
+                                {`${Math.round(data.current.feels_like)}˚`}
                             </div>
                         </div>
                     </div>
@@ -96,7 +105,7 @@ const CurrentWeather = ({ data, settings }) => {
                                 Humidity
                             </div>
                             <div>
-                                8.2
+                                {data.current.humidity}%
                             </div>
                         </div>
                     </div>

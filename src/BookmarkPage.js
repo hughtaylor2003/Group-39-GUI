@@ -35,7 +35,7 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
                             <div className='bookmark-value' onClick={()=> viewBookmark(bookmark)}>
 
                                 <p>{bookmark.city}</p>
-                                <p>Temperature: {bookmark.temperature}°C</p>
+                                <p>Temperature: {bookmark.temperature}°</p>
 
                                 <p>{bookmark.description}</p>
                             </div>

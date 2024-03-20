@@ -1,6 +1,6 @@
 import "./Extras.css"
 
-const Extras = ({data, index, settingsOptions}) => {
+const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
 
     const WEEK_DAYS = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dayInAWeek = new Date().getDay();
@@ -45,22 +45,34 @@ const Extras = ({data, index, settingsOptions}) => {
             <div className ='title'>
             Extra Options for {index === 0 ? 'Today' : forecastDay[index]}
             </div>
+
+            {renderNoSelected && <div>
+                You have no extra option selected as of now. Options can be added in settings
+            </div>}
+
             <div className="Panel-widgets">
-                <div className='Panel-slot'>
+                {settingsOptions.suntimes && <div className='Panel-slot'>
                     <div>Sunrise</div>
+                    
                         <div className="Icon-Content">
+                            
                             <img alt="weather" className="Sun-Icon" src={process.env.PUBLIC_URL + '/icons/sunrise.svg'}/>
+                            
                             <p>{sunriseTime({data, index})}</p>
+                            
                         </div>
-                </div>
-                <div className='Panel-slot'>
+                    
+                </div>}
+
+                {settingsOptions.suntimes && <div className='Panel-slot'>
                     <div>Sunset</div>
                     <div className="Icon-Content">
                         <img alt="weather" className="Sun-Icon" src={process.env.PUBLIC_URL + '/icons/sunset.svg'}/>
                         <p>{sunsetTime({data, index})}</p>
                     </div>
-                </div>
-                <div className='Panel-slot'>
+                </div>}
+
+                {settingsOptions.temp && <div className='Panel-slot'>
                     <div>Highest Temp</div>
                     <div className="Icon-Content">
                         <div className="Sun-Icon">
@@ -68,8 +80,9 @@ const Extras = ({data, index, settingsOptions}) => {
                         </div>
                         <p>{data.daily[index].temp.max}</p>
                     </div>
-                </div>
-                <div className='Panel-slot'>
+                </div>}
+
+                {settingsOptions.temp && <div className='Panel-slot'>
                     <div>Lowest Temp</div>
                     <div className="Icon-Content">
                         <div className="Sun-Icon">
@@ -77,16 +90,17 @@ const Extras = ({data, index, settingsOptions}) => {
                         </div>
                         <p>{data.daily[index].temp.min}</p>
                     </div>
-                </div>
+                </div>}
+
                 {settingsOptions.uvi && <div className='Panel-slot'>
                     <div>UV Index</div>
                     <div className="Icon-Content">
                         <div className="Icon">
                         <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + '/icons/uv-index-' + UviIcons({data}) + '.svg'}/>
                         </div>
-                      
                     </div>
                 </div>}
+
                 {settingsOptions.winddir && <div className='Panel-slot'>
                     <div>Wind Dir</div>
                     <div className="Icon-Content">
@@ -96,6 +110,47 @@ const Extras = ({data, index, settingsOptions}) => {
                         <h3>{deg}°</h3>
                     </div>
                 </div>}
+
+                {settingsOptions.humidity && <div className='Panel-slot'>
+                    <div>Humidity</div>
+                    <div className="Icon-Content">
+                        <div className="Sun-Icon">
+                        <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + '/icons/humidity.svg'}/>
+                        </div>
+                        <p>{data.daily[index].humidity}%</p>
+                    </div>
+                </div>}
+
+                {settingsOptions.windspeed && <div className='Panel-slot'>
+                    <div>Wind Speed</div>
+                    <div className="Icon-Content">
+                        <div className="Sun-Icon">
+                        <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + '/icons/wind.svg'}/>
+                        </div>
+                        <p>{data.daily[index].wind_speed} m/s</p>
+                    </div>
+                </div>}
+
+                {settingsOptions.pop && <div className='Panel-slot'>
+                    <div>Probability Of Precipitation</div>
+                    <div className="Icon-Content">
+                        <div className="Icon">
+                        <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + '/icons/raindrop.svg'}/>
+                        </div>
+                        <p>{data.daily[index].pop}%</p>
+                    </div>
+                </div>}
+
+                {settingsOptions.rain && <div className='Panel-slot'>
+                    <div>Total Precipitation</div>
+                    <div className="Icon-Content">
+                        <div className="Icon">
+                        <img alt="weather" className="weather=icon" src={process.env.PUBLIC_URL + '/icons/raindrops.svg'}/>
+                        </div>
+                        <p>{data.daily[index].rain ? data.daily[index].rain: '0'}mm</p>
+                    </div>
+                </div>}
+
             </div>
         </div>
             

@@ -156,6 +156,10 @@
         
     }
 
+    .temperature {
+        font-size: clamp(45px, 5vw, 70px);
+    }
+
 
 }
 

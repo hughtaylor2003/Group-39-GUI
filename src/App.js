@@ -20,10 +20,7 @@ function App() {
         setIsOpen(!isOpen);
     };
 
-    const handleSettingsSubmit = (newSettings) => {
-        setSettings(newSettings);
-        setIsOpen(!isOpen);
-    };
+    
     
     
     const [ActiveIndex, SetActiveIndex] = useState(0)
@@ -34,17 +31,27 @@ function App() {
     const [bookmarks, setBookmarks] = useState([]);
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    
+    const [currentSearch, setCurrentSearch] = useState({ value: "51.5074 -0.1278", label: "London, GB" });
+
     let tempUnitMap = 'metric'
     let tempUnitMeteo = ''
-    if (settings.Farenhight === true){
-        tempUnitMap = 'imperial' 
-        tempUnitMeteo = '&temperature_unit=fahrenheit'
-    }
-    else{
-        tempUnitMap = 'metric' 
-        tempUnitMeteo = ''
-    }
+    
+
+    const handleSettingsSubmit = (newSettings) => {
+        if(newSettings.Farenhight !== settings.Farenhight){
+            if (newSettings.Farenhight === true){
+                tempUnitMap = 'imperial' 
+                tempUnitMeteo = '&temperature_unit=fahrenheit'
+            }
+            else{
+                tempUnitMap = 'metric' 
+                tempUnitMeteo = ''
+            }
+            handleOnSearchChange(currentSearch)
+        }
+        setSettings(newSettings);
+        setIsOpen(!isOpen);
+    };
 
     useEffect(() => {
         // Fetch weather data for London when the component mounts
@@ -54,7 +61,7 @@ function App() {
 
     /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
-
+        console.log('searching')
         const [lat, lon] = searchData.value.split(" ");
 
         const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
@@ -63,6 +70,7 @@ function App() {
             .then(async (response) => {
                 const weatherResponse = await response[0].json();
                 setCurrentWeather({ city: searchData.label, ...weatherResponse });
+                setCurrentSearch(searchData);
             })
             .catch((err) => console.log(err));
 

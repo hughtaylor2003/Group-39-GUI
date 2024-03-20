@@ -1,27 +1,33 @@
-.Block{
+.Block, .Block-Active{
     text-align: center !important;
     display: inline-block; /* Display child elements inline */
     width: 15vw; /* Set the width of each child element */
     margin-top: 20px;
     height: 15vw; /* Set the height of each child element */
-    background-color: #46708B; /* Set background color */
+    background-color: #ffffff; /* Set background color */
     font-size: 2vw;
-    filter: drop-shadow(0 0 2px black);
+
+    border: 1.5px solid black;
     border-radius: 30%; /* Set border radius */
     margin-right: 10px; /* Add some margin between child elements */
     margin-bottom: 10px;
 
     padding: 10px;
-
+    color: black;
 }
 
 @media screen and (min-width: 768px) {
-    .Block{
+    .Block, .Block-Active{
         width: 8vw;
         height: 8vw;
         font-size: 1vw;
 
     }
+}
+
+.Block-Active{
+    border: 1px solid #009ee2;
+    background-color: rgba(126, 216, 254, 0.233);
 }
 
 .Inner-Parent{
@@ -31,9 +37,16 @@
     flex-direction: column;
 }
 
+.Block:hover {
+    background-color: rgba(126, 216, 254, 0.233);
+}
+
+
 .Icon-And-Temp{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
 }
 

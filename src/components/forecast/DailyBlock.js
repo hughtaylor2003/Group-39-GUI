@@ -8,18 +8,14 @@ const handleImageError = (event) => {
 
 export default function DailyBlock({day,icon, summary, ActiveIndex, index, test}) {
   return (
-        <div className='Block' onClick={() => ActiveIndex !== index ? test(index): null}>
+        <div className={ActiveIndex === index ? 'Block-Active' : 'Block' } onClick={() => ActiveIndex !== index ? test(index): null}>
           <div className='Inner-Parent'>
-          <div>{day}</div>
+          <div>{index === 0 ? 'Today':day }</div>
         <div className='Icon-And-Temp'> 
-          <img 
-            alt="icon" 
-            className='icon'
-            src={process.env.PUBLIC_URL + `/icons/${icon}.png`
-          }
+          <img alt="icon" className='icon'src={process.env.PUBLIC_URL + `/icons/${icon}.png`}
             onError = {handleImageError}
           />
-          <div>{summary}°C</div>
+          <div>{summary}°</div>
         </div>
         </div>
       </div>

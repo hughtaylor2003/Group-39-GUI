@@ -2,73 +2,41 @@ import React from 'react'
 import HourlyBlock from './components/forecast/HourlyBlock';
 import './DailyBreakDown.css'
 import dayjs from 'dayjs'
+import * as isBetween from 'dayjs/plugin/isBetween';
+import * as customParseFormat  from 'dayjs/plugin/customParseFormat';
+dayjs.extend(isBetween);
+dayjs.extend(customParseFormat )
 
-export default function DailyBreakDown({data, hrdata}) {
+export default function DailyBreakDown({data, hrdata, ActiveIndex, getWeatherIcon}) {
 
-    // Function to convert Unix timestamp to time in "hh:mm am/pm" format
-function unixTimestampToTime(timestamp) {
-    // Convert Unix timestamp to milliseconds
-    const milliseconds = (data.timezone_offset + timestamp) * 1000;
-
-    // Create a new Date object with the milliseconds
-    const date = new Date(milliseconds);
-
-    // Get hours and minutes
-    let hours = date.getHours();
-
-
-    // Determine if it's AM or PM
-    const amOrPm = hours >= 12 ? 'pm' : 'am';
-
-    // Convert hours to 12-hour format
-    hours = hours % 12 || 12; // If hours is 0, convert it to 12
-
-    // Get current date and hour
-    const currentDateTime = new Date();
-    const currentHour = currentDateTime.getHours();
-
-    console.log(data.hourly[1].weather[0].icon)
-
-    // Check if it's the current hour
-    if (hours === currentHour) {
-        return 'Now';
+    function getHour(date) {
+        return dayjs(date).format("HH:mm");
     }
 
-    // Return the time in "hh:mm am/pm" format
-    return `${hours}${amOrPm}`;
-}
+ 
+    let start = ActiveIndex * 24
+    let end = start + 24
+    let hrArr = []
+    let iconTime = 'd'
+    let dayTime = dayjs('6:00', 'HH:mm');
+    let nightTime = dayjs('17:00', 'HH:mm');
 
-function getHour(date) {
-    return dayjs(date).format("DD MMM HH:mm");
-  }
-
-    let arr = []
-    for (let i = 0; i < 5; i++) {
-        arr.push(
+    for(let j = start; j<end; j++) {
+        // Check if the hour is between 6:00 and 18:00
+        if (dayjs(getHour(hrdata.hourly.time[j]), 'HH:mm').isBetween(dayTime, nightTime, null, '[]')) {
+            iconTime = 'd'; // Set to daytime if between 6:00 and 18:00
+        } else {
+            iconTime = 'n'; // Otherwise, it's nighttime
+        }
+        hrArr.push(
             <HourlyBlock 
-            day={unixTimestampToTime(data.hourly[i].dt)}
-            icon={data.hourly[i].weather[0].icon} 
-            summary={Math.round(data.hourly[i].temp)}
+            day={getHour(hrdata.hourly.time[j])}
+            icon={getWeatherIcon(hrdata.hourly.weather_code[j]) + iconTime} 
+            summary={hrdata.hourly.temperature_2m[j]}
             ></HourlyBlock>
         )
     }
     
-
-    console.log(hrdata)
-    console.log('this is', hrdata.hourly.time[0])
-    let hrArr = []
-    for(let j = 0; j<150; j++) {
-        hrArr.push(
-            <HourlyBlock 
-            day={getHour(hrdata.hourly.time[j])}
-            icon={hrdata.hourly.weather_code[j]} 
-            summary={hrdata.hourly.temperature_2m[j]}
-            ></HourlyBlock>
-
-        )
-    }
-
-
   return (
     <>
 

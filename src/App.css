@@ -19,7 +19,7 @@ body{
   background-repeat:space;
   color:whitesmoke;
 
-  
+  background:#cbdbf4;
   background-attachment: fixed;
 }
 
@@ -37,63 +37,22 @@ body.settings-open .App {
 .mobile-toggle{
   display: flex;
   justify-content: flex-start;
-  width: 100vw;
+  width: 96vw;
   flex-wrap: wrap;
   overflow-x: scroll;
-  
-  /*justify-content: center;/*
-}
+  margin-top: 1.5vw;
+  margin-left: 1vw;
+  background-color: rgba(0, 0, 0, 0.311);/*#333333*/
+  border-radius: 6px;
+  border-style: solid;
+  border-color: rgb(51, 51, 51,0.4);/*#333333*/
 
-.App-header {
-  padding-top: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  padding: 10px;
-  border: none;
-  border-radius: 5px 0 0 5px;
-  width: 200px;
-}
-
-.search-button {
-  background-color: #61dafb;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.search-button:hover {
-  background-color: #55acee;
-}
-
-.weather-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-height: calc(100vh - 200px); /* Adjust 50px as needed to leave space for other elements */
   overflow-y: auto; /* Enable vertical scrolling if necessary */
   scrollbar-color: 0;
   }
 
 
-  ::-webkit-scrollbar {
-    /*display: none;*/
-}
+
 
 .weather-card {
   background-color: #f0f0f0;
@@ -125,6 +84,13 @@ body.settings-open .App {
 .search{
   width:70%;
 
-  margin: 10px;
   color:black
+}
+
+.Bookmark-Section{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+
 }

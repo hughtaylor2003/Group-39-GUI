@@ -11,6 +11,8 @@
 
     padding: 10px;
 
+    background-color: rgba(249, 249, 249, 0.837);
+
 }
 @media screen and (min-width: 768px) {
     .Hourly-Block{

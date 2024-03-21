@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
 })
 
 /*DailyBlock.js but with react-pdf elements: View, Text, Image */
-const PDFDailyBlock = ({day,icon, summary}) => {
+const PDFDailyBlock = ({day,icon, summary, unit}) => {
     return (
     <View style={styles.Block}>
         <View style={styles.InnerParrent}>
             <Text style={styles.Text}>{day}</Text>
         <View style={styles.IconAndTemp}> 
             <Image alt="icon" style={styles.icon} src={process.env.PUBLIC_URL + `/icons/${icon}.png`} onError = {DailyBlock.handleImageError}/>
-            <Text style={styles.Text}>{summary}°C</Text>
+            <Text style={styles.Text}>{summary}°{unit}</Text>
         </View>
         </View>
     </View>

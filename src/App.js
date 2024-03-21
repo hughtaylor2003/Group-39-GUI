@@ -22,20 +22,6 @@ function App() {
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
     };
-
-
-//save pdf locally to be able to download it from button
-    const downloadPDF = async() => {
-        const blob = await pdf((
-            <PDFForecast 
-             title='Forecast'
-             WeatherData={currentWeather}
-             HourWeatherData={HourlyWeather}
-             getWeatherIcon={getWeatherIcon}
-             />
-        )).toBlob();
-        saveAs(blob,'forecast');
-    };
     
     
     const [ActiveIndex, SetActiveIndex] = useState(0)
@@ -73,6 +59,18 @@ function App() {
         handleOnSearchChange({ value: "51.5074 -0.1278", label: "London, GB" });
     }, []);
 
+    //save pdf locally to be able to download it from button
+    const downloadPDF = async() => {
+        const blob = await pdf((
+            <PDFForecast 
+             title='Forecast'
+             WeatherData={currentWeather}
+             HourWeatherData={HourlyWeather}
+             getWeatherIcon={getWeatherIcon}
+             Settings={settings}/>
+        )).toBlob();
+        saveAs(blob,'forecast');
+    };
 
     /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {

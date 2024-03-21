@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 
 /*the hour block*/
 const PDFHourlyBlock = ({hour,icon, summary}) => {
+
     return(
     <View style={styles.HourlyBlock}>
             <Text style={styles.Text}>{hour}</Text>

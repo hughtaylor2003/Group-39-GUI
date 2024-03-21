@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     
 });
 
-const PDFCurrentWeather = ({ data }) => {
+const PDFCurrentWeather = ({ data, unit}) => {
     console.log(data.current.weather[0].icon)
 
     const sunriseTime = ({data}) => {
@@ -188,7 +188,7 @@ const PDFCurrentWeather = ({ data }) => {
             </View>
             <View style={styles.bottom}>
                 <View style={styles.bottomLeft}>
-                    <Text style={styles.temperature}>{`${Math.round(data.current.temp)}˚C`}</Text>
+                    <Text style={styles.temperature}>{`${Math.round(data.current.temp)}˚` + unit}</Text>
                 </View>
                 <View style={styles.bottomRight}>
                     <View style={styles.details}>
@@ -197,7 +197,7 @@ const PDFCurrentWeather = ({ data }) => {
                         </View>
                         <View style={styles.parameterRow}>
                             <Text style={styles.parameterLabel}>Feels like</Text>
-                            <Text style={styles.parameterValue}>{`${Math.round(data.current.feels_like)}˚C`}</Text>
+                            <Text style={styles.parameterValue}>{`${Math.round(data.current.feels_like)}˚` + unit}</Text>
                         </View>
                         <View style={styles.parameterRow}>
                             <Text style={styles.parameterLabel}>Wind</Text>

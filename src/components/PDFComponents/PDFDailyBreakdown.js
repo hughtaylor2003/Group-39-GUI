@@ -1,10 +1,9 @@
 import React from "react";
-import { Text, View, StyleSheet, Image} from "@react-pdf/renderer";
+import { Text, View, StyleSheet} from "@react-pdf/renderer";
 import dayjs from 'dayjs'
 import * as isBetween from 'dayjs/plugin/isBetween';
 import * as customParseFormat  from 'dayjs/plugin/customParseFormat';
 import PDFHourlyBlock from "./PDFHourlyBlock";
-import Forecast from "../forecast/forecast";
 dayjs.extend(isBetween);
 dayjs.extend(customParseFormat )
 

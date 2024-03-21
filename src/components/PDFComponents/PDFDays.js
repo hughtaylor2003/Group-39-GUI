@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 }) 
 
 /*forecast.js but for pdf use -> display the simple information about temperature and weather condition for each day */
-const PDFDays =({data}) => {
+const PDFDays =({data, unit}) => {
 
     function unixTimestampToDay(timestamp) {
         const milliseconds = timestamp * 1000;
@@ -35,6 +35,7 @@ const PDFDays =({data}) => {
             day={unixTimestampToDay(dailyData.dt)}
             icon={dailyData.weather[0].icon.toString()} 
             summary={Math.round(dailyData.temp['day'])}
+            unit={unit}
         />
     ));
 

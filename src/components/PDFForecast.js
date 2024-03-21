@@ -25,7 +25,7 @@ const PDFForecast = ({WeatherData, HourWeatherData, getWeatherIcon, Settings}) =
     //create the pages with the details of days: hourly weather and other metrics
     for(let i = 0; i<7; i++){
         daysData.push(
-            <Page size='A4' style={{backgroundColor: '#cbdbf4'}}>
+            <Page key={i} size='A4' style={{backgroundColor: '#cbdbf4'}}>
                 <PDFDailyBreakdown hrdata = {HourWeatherData} Index = {i} getWeatherIcon={getWeatherIcon}></PDFDailyBreakdown>
                 <PDFExtraMetrics data={WeatherData} index={i}></PDFExtraMetrics>
             </Page>

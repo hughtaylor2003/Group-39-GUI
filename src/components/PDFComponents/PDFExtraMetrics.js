@@ -168,7 +168,7 @@ const PDFExtraMetrics = ({data, index}) => {
                     <Text style={styles.text}>Wind Dir</Text>
                     <View style={styles.IconContent}>
                         <View style={styles.WindIcon}>
-                            <Image style={{transform:'Rotate:(`${deg}deg`)'}} src={process.env.PUBLIC_URL + '/icons/arrow.png'} alt="Sunrise"></Image>
+                            <Image style={{transformRotate:'(`${deg}deg`)'}} src={process.env.PUBLIC_URL + '/icons/arrow.png'} alt="Sunrise"></Image>
                         </View>
                         <Text style={styles.text}>{deg}°</Text>
                     </View>

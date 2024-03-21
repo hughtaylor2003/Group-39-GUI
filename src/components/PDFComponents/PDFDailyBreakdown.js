@@ -60,7 +60,8 @@ const PDFDailyBreakdown = ({hrdata, Index, getWeatherIcon}) => {
             iconTime = 'n'; // Otherwise, it's nighttime
         }
         hrArr.push(
-            <PDFHourlyBlock 
+            <PDFHourlyBlock
+            key={j} 
             hour={getHour(hrdata.hourly.time[j])}
             icon={getWeatherIcon(hrdata.hourly.weather_code[j]) + iconTime} 
             summary={Math.round(hrdata.hourly.temperature_2m[j])}

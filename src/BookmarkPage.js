@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './bookmarkPage.css';
 
-export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
+export default function BookmarkPage({ isOpen, onClose,loadBookmark,unit}) {
     const [bookmarks, setBookmarks] = useState([]);
 
     useEffect(() => {
@@ -21,6 +21,22 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
         onClose(); 
     };
 
+    //convert to right unit without api call
+    function deg (bookmark) {
+        if (unit.map == 'imperial' && (bookmark.units=='standard' || bookmark.units=='metric')){
+            bookmark.units = unit.map
+            bookmark.temperature = (bookmark.temperature * 9 / 5) + 32
+            return(bookmark.temperature)
+        }
+        else if (unit.map == 'metric' && bookmark.units=='imperial')
+        {
+            bookmark.units = unit.map
+            bookmark.temperature = (bookmark.temperature - 32) * 5 / 9
+            return(bookmark.temperature) 
+        }
+        else return bookmark.temperature
+    }
+
     return (
         <>
             {isOpen && (
@@ -33,7 +49,7 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
                             <div className='bookmark-value' onClick={()=> viewBookmark(bookmark)}>
 
                                 <p>{bookmark.city}</p>
-                                <p>Temperature: {bookmark.temperature}°</p>
+                                <p>Temperature: {Math.round(deg(bookmark))}°</p>
 
                                 <p>{bookmark.description}</p>
                             </div>

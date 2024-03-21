@@ -108,11 +108,12 @@ function App() {
             const response = await axios.get(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnit.map}`);
             const temperature = response.data.current.temp;
             const description = response.data.current.weather[0].description;
+            const units = tempUnit.map
             // Check if the city is already in the list
             const existingBookmarkIndex = bookmarks.findIndex(bookmark => bookmark.city === city);
             if (existingBookmarkIndex === -1) {
                 // City not found in bookmarks, add it
-                const updatedBookmarks = [...bookmarks, { city, lat, lon, temperature, description }];
+                const updatedBookmarks = [...bookmarks, { city, lat, lon, temperature, description, units}];
                 setBookmarks(updatedBookmarks);
                 localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
             } else {
@@ -219,7 +220,7 @@ function App() {
             <div className ='Bookmark-Section'>
                 <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
-                <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
+                <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  unit = {tempUnit}/>
                 <button onClick={clearStorage}>Clear bookmarks</button>
                 {currentWeather && HourlyWeather !== null && <button onClick={() => downloadPDF()}> Download</button>}
             </div>

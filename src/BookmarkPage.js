@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import './bookmarkPage.css';
 
 export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
@@ -24,7 +23,6 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
 
     return (
         <>
-        
             {isOpen && (
                 <div className='bookmark-overlay'>
                 <div className="bookmarks-container">

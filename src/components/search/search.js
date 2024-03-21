@@ -7,7 +7,7 @@ import './search.css'
 
 const Search = ({ onSearchChange }) => {
     const [search, setSearch] = useState(null);
-
+    
     const loadOptions = (inputValue) => {
         return fetch(
             `${GEO_API_URL}/cities?minPopulation=100000&namePrefix=${inputValue}`,

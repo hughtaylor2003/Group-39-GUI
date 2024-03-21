@@ -4,8 +4,7 @@ import DailyBlock from './DailyBlock';
 
 
 const Forecast = ({ data, ActiveIndex, test}) => {
-
-
+    
     function unixTimestampToDay(timestamp) {
         const milliseconds = timestamp * 1000;
         const date = new Date(milliseconds);
@@ -14,7 +13,6 @@ const Forecast = ({ data, ActiveIndex, test}) => {
         return days[dayOfWeek];
     }
     
-
     const arr = data.daily.slice(0, 7).map((dailyData, i) => (
         <DailyBlock 
             key={i} // Use i as the key

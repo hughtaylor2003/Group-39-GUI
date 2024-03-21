@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-
+import React, { useState, useEffect } from 'react'; // import react
+import axios from 'axios'; // import module
 import './App.css'; // Importing CSS file
 
+//importing components from other js files
 import Settings from './components/Settings';
 import Search from './components/search/search'; // Adjusted import path
 import CurrentWeather from './components/current-weather/current-weather';
 import Forecast from './components/forecast/forecast';
 import Extras from './components/extras/Extras';
 import BookmarkPage from './BookmarkPage';
-import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api";
 import DailyBreakDown from './DailyBreakDown';
-import { clear } from '@testing-library/user-event/dist/clear';
+import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api"; // import stuff for api calls
 import PDFForecast from './components/PDFForecast';
 import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
@@ -22,8 +20,8 @@ function App() {
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
     };
-    
-    
+
+    //Section for useStates
     const [ActiveIndex, SetActiveIndex] = useState(0)
     const [currentWeather, setCurrentWeather] = useState(null);
     const [HourlyWeather, setHourlyWeather] = useState(null);
@@ -31,14 +29,15 @@ function App() {
     const [settings, setSettings] = useState({suntimes: false, winddir: false, uvi: false, Farenhight: false, humidity: false, windspeed: false, pop: false, rain:false, temp:false });
     const [bookmarks, setBookmarks] = useState([]);
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [currentSearch, setCurrentSearch] = useState({ value: "51.5074 -0.1278", label: "London, GB" });
 
+    //Two units that are used to determine which unit of temp the apis use for the data that is given back
     let tempUnitMap = 'metric'
     let tempUnitMeteo = ''
     
-
+    //Section of code for what happens after user saves their settings
     const handleSettingsSubmit = (newSettings) => {
+        //Checks if the user has switched temp unit and if so: sets the two tempUnit api variables accordingly
         if(newSettings.Farenhight !== settings.Farenhight){
             if (newSettings.Farenhight === true){
                 tempUnitMap = 'imperial' 
@@ -48,9 +47,9 @@ function App() {
                 tempUnitMap = 'metric' 
                 tempUnitMeteo = ''
             }
-            handleOnSearchChange(currentSearch)
+            handleOnSearchChange(currentSearch)//Recalls the api but for the appropriate temp unit
         }
-        setSettings(newSettings);
+        setSettings(newSettings);// Update settings useState
         setIsOpen(!isOpen);
     };
 
@@ -74,11 +73,10 @@ function App() {
 
     /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
-        console.log('searching')
         const [lat, lon] = searchData.value.split(" ");
 
+        //Open-Weather-Map API call: Data used for most components
         const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
-
         Promise.all([currentWeatherFetch])
             .then(async (response) => {
                 const weatherResponse = await response[0].json();
@@ -86,9 +84,9 @@ function App() {
                 setCurrentSearch(searchData);
             })
             .catch((err) => console.log(err));
-
+        
+        //Open-Meteo API call: Data used for hourly forecast
         const HourlyWeatherFetch = fetch(`${OPEN_METEO_URL}latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code${tempUnitMeteo}`);
-
         Promise.all([HourlyWeatherFetch])
             .then(async (response) => {
                 const weatherHourlyResponse = await response[0].json();
@@ -96,10 +94,6 @@ function App() {
             })
             .catch((err) => console.log(err));
         
-    };
-
-    const toggleSettingsOverlay = () => {
-        setIsSettingsOpen(!isSettingsOpen);
     };
 
     const toggleBookmarkPageOverlay = () => {
@@ -146,13 +140,14 @@ function App() {
         handleOnSearchChange(bookmark);
     }
 
+    //Used to clear the bookmarks and reset bookmarks
     const clearStorage = ()=>{
         localStorage.clear();
         setBookmarks([])
     }
 
-
-
+    //Used to convert weather code given by Open-Meteo API for each hourly date so the appropriate weather is returned
+    //For example 0 is returned for 1PM so convert to 01 which is the file name for the icon(01.d.png/0.1n.png) found in public/icons folder
     const getWeatherIcon = (code) => {
         const weatherCodes = {
             /*Clouds*/
@@ -195,9 +190,13 @@ function App() {
         return weatherCodes[code] || "unknown"; // Default to "unknown" if code not found
     };
       
+    //For the Extra Options section: Check if website renders 'no extra options selected' or renders the extra options panels
     let renderNoSelected = true; 
     let count = Object.values(settings).reduce((a, settings) => a + settings, 0)
-    
+    //Check if only fahrenheit is selected: if so count is 0 so 'no extra options selected' is rendered
+    if (count === 1 && settings.Farenhight === true){
+        count = 0
+    }
     if(count > 0){
         renderNoSelected = false;
     }
@@ -221,7 +220,7 @@ function App() {
         </div>
             {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
             <div className="mobile-toggle">
-                {currentWeather && HourlyWeather !== null && <DailyBreakDown data={currentWeather} hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
+                {currentWeather && HourlyWeather !== null && <DailyBreakDown hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
             </div>
             {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} test ={SetActiveIndex}/>}
             {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings} renderNoSelected = {renderNoSelected}/>}

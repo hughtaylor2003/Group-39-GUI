@@ -5,8 +5,8 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
     const WEEK_DAYS = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dayInAWeek = new Date().getDay();
     const forecastDay = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
-    console.log(data.daily[index])
-   
+
+   //Convert suntime given by API to readable format
     const sunriseTime = ({data, index}) => {
         const sunrise  = data.daily[index].sunrise;
         const timezone_offset  = data.timezone_offset;
@@ -14,11 +14,11 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
         const sunriseDate = new Date(sunriseTimestamp);
         const hours = sunriseDate.getUTCHours().toString().padStart(2, '0');
         const minutes = sunriseDate.getUTCMinutes().toString().padStart(2, '0');
-        const seconds = sunriseDate.getUTCSeconds().toString().padStart(2, '0');
         return `${hours}:${minutes}`;
     
     };
 
+    //Convert suntime given by API to readable format
     const sunsetTime = ({data, index}) => {
         const sunset  = data.daily[index].sunset;
         const timezone_offset  = data.timezone_offset;
@@ -26,15 +26,13 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
         const sunsetDate = new Date(sunsetTimestamp);
         const hours = sunsetDate.getUTCHours().toString().padStart(2, '0');
         const minutes = sunsetDate.getUTCMinutes().toString().padStart(2, '0');
-        const seconds = sunsetDate.getUTCSeconds().toString().padStart(2, '0');
         return `${hours}:${minutes}`;
     
     };
 
+    //Convert UV index given by API to whole number so appropriate UV Index icon is used. UV Index 2 uses uv-index-2.svg
     const UviIcons = ({data}) =>{
         const uvi = Math.round(data.daily[index].uvi)
-        console.log('do it' + uvi);
-        
         return uvi
     };
 
@@ -53,15 +51,10 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
             <div className="Panel-widgets">
                 {settingsOptions.suntimes && <div className='Panel-slot'>
                     <div>Sunrise</div>
-                    
                         <div className="Icon-Content">
-                            
                             <img alt="weather" className="Sun-Icon" src={process.env.PUBLIC_URL + '/icons/sunrise.svg'}/>
-                            
                             <p>{sunriseTime({data, index})}</p>
-                            
                         </div>
-                    
                 </div>}
 
                 {settingsOptions.suntimes && <div className='Panel-slot'>
@@ -150,7 +143,6 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
                         <p>{data.daily[index].rain ? data.daily[index].rain: '0'}mm</p>
                     </div>
                 </div>}
-
             </div>
         </div>
             

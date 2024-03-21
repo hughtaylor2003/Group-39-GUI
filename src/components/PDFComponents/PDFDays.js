@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, Font} from "@react-pdf/renderer";
+import { View, StyleSheet} from "@react-pdf/renderer";
 import PDFDailyBlock from "./PDFDailyBlock";
 
 const styles = StyleSheet.create({
@@ -9,10 +9,13 @@ const styles = StyleSheet.create({
         marginVertical: 0,
     },
 
-    /*display the days in one row*/
+    /*display the days two rows*/
     InnerDaysBox:{
         display:'flex',
         flexDirection: 'row',
+        flexWrap:'wrap',
+        justifyContent:'center',
+        alignItems:'center'
     }
     
 }) 

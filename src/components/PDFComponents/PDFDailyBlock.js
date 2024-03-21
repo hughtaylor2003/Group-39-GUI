@@ -9,19 +9,18 @@ const styles = StyleSheet.create({
     Block:{ 
         textAlign: 'center',
         display: 'inline-block', 
-        width: '25vw', 
+        width: '17vw', 
         marginTop: 20,
         height: '17vw',
         backgroundColor: '#333333', 
-        fontSize: '2vw',
-        borderTopLeftRadius: '30%',
-        borderTopRightRadius: '30%',
-        borderBottomRightRadius: '30%',
-        borderBottomLeftRadius: '30%',
+        fontSize: '3vw',
+        borderRadius: '30%',
         marginRight: 10, 
         marginBottom: 10,
         paddingVerical: 10,
         paddingHorizontal: 1,
+        justifyContent: 'center',
+        alignItems:'center',
     },
 
     /*Inner parent styling */
@@ -30,12 +29,14 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'space-evenly',
         flexDirection: 'column',
+        alignItems:'center',
     },
 
     /*Icon and temperature placement styling */
     IconAndTemp:{
         display: 'flex',
         justifyContent: 'center',
+        alignItems:'center',
     },
 
     /*Icon styling */
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         fontFamily:'Roboto',
         color:'white',
+        textAlign:'center'
     }
 
 })

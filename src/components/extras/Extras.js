@@ -36,7 +36,7 @@ const Extras = ({data, index, settingsOptions, renderNoSelected}) => {
         return uvi
     };
 
-    let deg = data.current.wind_deg ? data.current.wind_deg : null
+    let deg = data.daily[index].wind_deg ? data.daily[index].wind_deg : null
     
     return (
         <div className="Top">

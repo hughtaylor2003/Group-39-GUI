@@ -11,7 +11,9 @@ import Extras from './components/extras/Extras';
 import BookmarkPage from './BookmarkPage';
 import DailyBreakDown from './DailyBreakDown';
 import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api"; // import stuff for api calls
-
+import PDFForecast from './components/PDFForecast';
+import { saveAs } from 'file-saver';
+import { pdf } from '@react-pdf/renderer';
 
 function App() {
 
@@ -55,6 +57,19 @@ function App() {
         // Fetch weather data for London when the component mounts
         handleOnSearchChange({ value: "51.5074 -0.1278", label: "London, GB" });
     }, []);
+
+    //save pdf locally to be able to download it from button
+    const downloadPDF = async() => {
+        const blob = await pdf((
+            <PDFForecast 
+             title='Forecast'
+             WeatherData={currentWeather}
+             HourWeatherData={HourlyWeather}
+             getWeatherIcon={getWeatherIcon}
+             Settings={settings}/>
+        )).toBlob();
+        saveAs(blob,'forecast');
+    };
 
     /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
@@ -194,7 +209,6 @@ function App() {
             <div className='search'>
                 <Search onSearchChange={handleOnSearchChange} />
             </div>
-
             <img alt ="icon" onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
         </div>
         <div className ='Bookmark-Section'>
@@ -202,6 +216,7 @@ function App() {
                 <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
                 <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  />
                 <button onClick={clearStorage}>Clear bookmarks</button>
+                {currentWeather && HourlyWeather !== null && <button onClick={() => downloadPDF()}> Download</button>}
         </div>
             {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
             <div className="mobile-toggle">

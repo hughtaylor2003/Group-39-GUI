@@ -46,8 +46,17 @@ label{
   color: black
 }
 
+/*button styling*/
+button{
+  color: white;
+  background-color: rgb(51, 51, 51,0.4);
+  border-color: rgba(51, 51, 51, 0.4);
+}
 
-
+button:hover{
+  background-color: rgba(183, 217, 255, 0.644);
+  cursor: pointer;
+}
 
 .settings-container div {
   margin-bottom: 10px;

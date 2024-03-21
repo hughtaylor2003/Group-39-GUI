@@ -1,5 +1,6 @@
 import React from 'react';
-import {Page, Document} from '@react-pdf/renderer';
+import {Page, Document} from '@react-pdf/renderer'; //react pdf necessary elements
+//import following components from js files
 import PDFCurrentWeather from './PDFComponents/PDFCurrentWeather';
 import PDFDays from './PDFComponents/PDFDays';
 import PDFDailyBreakdown from './PDFComponents/PDFDailyBreakdown';
@@ -12,6 +13,7 @@ import PDFExtraMetrics from './PDFComponents/PDFExtraMetrics';
 //Page - a page in the pdf
 //Text - any text, similar to p tag, h1,h2..
 //Image - equivalent to img tag
+//The above are imported where they are needed in the PDF component .js files
 
 //Styling is more limited than regular css, no grid support, no transform
 //It is done directly in the js file using StyleSheet objects from the module react-pdf

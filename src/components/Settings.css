@@ -2,10 +2,10 @@
 .settings-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  
   justify-content: center;
-  text-align: center;
-  width: 300px;
+  text-align: left;
+  width: 20rem;
   border-radius: 12%;
   /* Center the box in the middle of the screen */
   position: fixed;
@@ -13,11 +13,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
   /* Additional styling */
-  background-color: rgba(200, 252, 255, 0.8); /* Use rgba for transparency */
+  background-color: rgba(234, 254, 255, 0.8); /* Use rgba for transparency */
   z-index: 10;
   padding: 20px;
   width: fit-content;
   height: fit-content;
+}
+
+label{
+  height:2rem;
+  width:18rem;
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
 }
 
 /* Create a pseudo-element to cover the background */
@@ -30,7 +38,6 @@
   background-color: rgba(0, 0, 0, 0.5); /* Adjust transparency as needed */
   backdrop-filter: blur(10px); /* Apply a blur effect */
   z-index: 5; /* Ensure the overlay is behind the settings container */
-
 
   
 }

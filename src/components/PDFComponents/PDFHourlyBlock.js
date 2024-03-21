@@ -7,12 +7,10 @@ import { Text, View, StyleSheet, Image} from "@react-pdf/renderer";
 const styles = StyleSheet.create({
     /*block border*/
     HourlyBlock:{
-        
         flexGrow: 1,
         flexShrink: 1,
         flexBasis: '20%'
     },
-
 
     /*icon styling*/
     hourlyIcon:{
@@ -20,7 +18,6 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         width: '90%'
     },
-
     /*apply font to text */
     Text:{
         textAlign: 'center',
@@ -29,9 +26,8 @@ const styles = StyleSheet.create({
     }
 });
 
-/*the hour block*/
+/*the HourlyBlock.js but with react-pdf elements*/
 const PDFHourlyBlock = ({hour,icon, summary}) => {
-
     return(
     <View style={styles.HourlyBlock}>
             <Text style={styles.Text}>{hour}</Text>

@@ -2,10 +2,10 @@ import React from "react";
 import { Text, View, StyleSheet, Image} from "@react-pdf/renderer";
 import DailyBlock from "../forecast/DailyBlock";
 
-
+//page containing weather data in one day in a cell
 
 const styles = StyleSheet.create({
-    /* Styling the box containing the days */
+    /* Styling the wrapper box containing the days */
     Block:{ 
         textAlign: 'center',
         display: 'inline-block', 

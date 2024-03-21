@@ -7,7 +7,10 @@ import PDFHourlyBlock from "./PDFHourlyBlock";
 dayjs.extend(isBetween);
 dayjs.extend(customParseFormat )
 
+//display the weather data for the day hourly
+
 const styles = StyleSheet.create({
+    //main container with the hourly cells styling
     DailyParent:{
         display:'flex',
         flexDirection: 'row',
@@ -15,7 +18,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         alignItems:'center',
         },
-
+    //wrapper container of the whole breakdown styling
     OuterParent:{
         backgroundColor: '#F9F9F9',
         borderStyle: 'solid',
@@ -37,6 +40,7 @@ const styles = StyleSheet.create({
 });
 
 const PDFDailyBreakdown = ({hrdata, Index, getWeatherIcon}) => {
+    //get hour in format HH:mm
     function getHour(date) {
         return dayjs(date).format("HH:mm");
     }
@@ -65,6 +69,7 @@ const PDFDailyBreakdown = ({hrdata, Index, getWeatherIcon}) => {
         )
     }
 
+    //display the right weekly day and date
     const WEEK_DAYS = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dayInAWeek = new Date().getDay();
     const forecastDay = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
@@ -74,7 +79,7 @@ const PDFDailyBreakdown = ({hrdata, Index, getWeatherIcon}) => {
     const date = today.getDate();
     const currDate = date + ' ' + months[month];
     
-    /*PDF elements*/ 
+    /*forecast.js with react-PDF elements*/ 
   return (
     <>
     <View style={styles.OuterParent}>

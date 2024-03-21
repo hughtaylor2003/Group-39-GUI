@@ -40,8 +40,9 @@ export default function BookmarkPage({ isOpen, onClose,loadBookmark }) {
                         </div>
                     ))}
                     </div>
+                    <button className='close-button' onClick={onClose}>Close</button>
                 </div>
-                <button className='close-button' onClick={onClose}>Close</button>
+                
             </div>
         )}
     </>

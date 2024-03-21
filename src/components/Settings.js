@@ -28,61 +28,61 @@ export default function Settings({ isOpen, onSubmit }) {
        <div className="settings-container">
        <div>
          <label>
+           <p>Show Suntimes</p>
            <input type="checkbox" checked={suntimes} onChange={() => setsuntimes(!suntimes)} />
-           Show Suntimes
          </label>
        </div>
        <div>
          <label>
+           <p>Show Wind Direction</p>
            <input type="checkbox" checked={winddir} onChange={() => setwindir(!winddir)} />
-           Show Wind Direction
          </label>
        </div>
        <div>
          <label>
+           <p>Show UVI</p>
            <input type="checkbox" checked={uvi} onChange={() => setuvi(!uvi)} />
-           Show UVI
          </label>
        </div>
        <div>
          <label>
+           <p>Farenhight</p>
            <input type="checkbox" checked={Farenhight} onChange={() => setFarenhight(!Farenhight)} />
-           Farenhight
          </label>
        </div>
 
        <div>
          <label>
+           <p>Show Humidity</p>
            <input type="checkbox" checked={humidity} onChange={() => sethumidity(!humidity)} />
-           Show Humidity 
          </label>
        </div>
 
        <div>
          <label>
-           <input type="checkbox" checked={windspeed} onChange={() => setwindspeed(!windspeed)} />
-           Show Wind Speed 
+           <p>Show Wind Speed</p>
+           <input type="checkbox" checked={windspeed} onChange={() => setwindspeed(!windspeed)} /> 
          </label>
        </div>
 
        <div>
          <label>
+           <p>Show Probability Of Precipitation</p>
            <input type="checkbox" checked={pop} onChange={() => setpop(!pop)} />
-           Show Probability Of Precipitation
          </label>
        </div>
 
        <div>
          <label>
+           <p>Show Total Precipitation</p>
            <input type="checkbox" checked={rain} onChange={() => setrain(!rain)} />
-           Show Total Precipitation
          </label>
        </div>
 
        <div>
          <label>
+           <p>Show Max And Min Temperature</p>
            <input type="checkbox" checked={temp} onChange={() => settemp(!temp)} />
-           Show Max And Min Temperature 
          </label>
        </div>
 

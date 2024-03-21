@@ -1,6 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet, Image, Font} from "@react-pdf/renderer";
 
+//page containing the overiew of the weather in the current time
+
 //register font
 Font.register({
     family: "Roboto",
@@ -126,7 +128,7 @@ const PDFCurrentWeather = ({ data, unit}) => {
     const currDate = date + ' ' + months[month];
     const currTime = new Date().toLocaleTimeString();
 
-    //alert info
+    //get alert info
     let adviceString = '';
     if (unit === 'C'){
         if (data.current.temp > 24){
@@ -156,11 +158,12 @@ const PDFCurrentWeather = ({ data, unit}) => {
     }
 
     //file using view,Text, image
+    //divided into topleft, topright, bottomleft,bottomRight
+    //top conntains data, main weather information
+    //bottom contains various other weather metrics
     return (
-        <View style={styles.Weather}>
+        <View style={styles.Weather}> 
             <View style={styles.top}>
-                {//<Image src=""/>
-                }
                 <View style={styles.topLeft}>
                     <Text style={styles.city}>{data.city}</Text>
                     <Text style={styles.weatherDescription}>{data.current.weather[0].description}</Text>

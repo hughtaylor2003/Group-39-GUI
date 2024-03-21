@@ -1,9 +1,9 @@
 .Hourly-Block{
     text-align: center !important;
     display: inline-block; /* Display child elements inline */
-    width: 15%; /* Set the width of each child element */
+    width: 16%; /* Set the width of each child element */
     margin-top: 20px;
-    height: 15vw; /* Set the height of each child element */
+    height: 16vw; /* Set the height of each child element */
     font-size: 4vw;
     font-weight: bolder;
     border-radius: 30%; /* Set border radius */

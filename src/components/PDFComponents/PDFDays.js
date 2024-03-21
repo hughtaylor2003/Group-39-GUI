@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet} from "@react-pdf/renderer";
 import PDFDailyBlock from "./PDFDailyBlock";
 
+//Weekly simplified weather display
+
 const styles = StyleSheet.create({
     /*margins*/
     DaysBox:{
@@ -9,7 +11,7 @@ const styles = StyleSheet.create({
         marginVertical: 0,
     },
 
-    /*display the days two rows*/
+    /*display the days in two rows*/
     InnerDaysBox:{
         display:'flex',
         flexDirection: 'row',

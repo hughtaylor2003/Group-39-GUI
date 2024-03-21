@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'; // import react
 import axios from 'axios'; // import module
 import './App.css'; // Importing CSS file
+import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api"; // import stuff for api calls
+import { saveAs } from 'file-saver'; // for saving the pdf file on the client
+import { pdf } from '@react-pdf/renderer'; // pdf renderer module
 
-//importing components from other js files
+//importing components from other js files:
 import Settings from './components/Settings';
 import Search from './components/search/search'; // Adjusted import path
 import CurrentWeather from './components/current-weather/current-weather';
@@ -10,10 +13,7 @@ import Forecast from './components/forecast/forecast';
 import Extras from './components/extras/Extras';
 import BookmarkPage from './BookmarkPage';
 import DailyBreakDown from './DailyBreakDown';
-import { OPEN_WEATHER_URL, OPEN_WEATHER_KEY, OPEN_METEO_URL } from "./api"; // import stuff for api calls
 import PDFForecast from './components/PDFForecast';
-import { saveAs } from 'file-saver';
-import { pdf } from '@react-pdf/renderer';
 
 function App() {
 

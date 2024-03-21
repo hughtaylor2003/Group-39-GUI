@@ -31,23 +31,19 @@ function App() {
     const [isBookmarkPageOpen, setIsBookmarkPageOpen] = useState(false);
     const [currentSearch, setCurrentSearch] = useState({ value: "51.5074 -0.1278", label: "London, GB" });
 
-    //Two units that are used to determine which unit of temp the apis use for the data that is given back
-    let tempUnitMap = 'metric'
-    let tempUnitMeteo = ''
-    
+    //Unit that are used to determine which unit of temp the apis use for the data that is given back
+    const [tempUnit, settempUnit] = useState({map: 'metric',meteo: ''})
+
     //Section of code for what happens after user saves their settings
     const handleSettingsSubmit = (newSettings) => {
         //Checks if the user has switched temp unit and if so: sets the two tempUnit api variables accordingly
         if(newSettings.Farenhight !== settings.Farenhight){
             if (newSettings.Farenhight === true){
-                tempUnitMap = 'imperial' 
-                tempUnitMeteo = '&temperature_unit=fahrenheit'
+                settempUnit({...tempUnit, map:'imperial', meteo:'&temperature_unit=fahrenheit'})
             }
             else{
-                tempUnitMap = 'metric' 
-                tempUnitMeteo = ''
+                settempUnit({...tempUnit, map:'metric', meteo:''})
             }
-            handleOnSearchChange(currentSearch)//Recalls the api but for the appropriate temp unit
         }
         setSettings(newSettings);// Update settings useState
         setIsOpen(!isOpen);
@@ -57,6 +53,10 @@ function App() {
         // Fetch weather data for London when the component mounts
         handleOnSearchChange({ value: "51.5074 -0.1278", label: "London, GB" });
     }, []);
+
+    useEffect(() => {
+        handleOnSearchChange(currentSearch);//Recalls the api but for the appropriate temp unit
+    },[tempUnit.map, tempUnit.meteo]);
 
     //save pdf locally to be able to download it from button
     const downloadPDF = async() => {
@@ -74,9 +74,8 @@ function App() {
     /* Takes values from the city predicter (latitude and longitude*/ 
     const handleOnSearchChange = (searchData) => {
         const [lat, lon] = searchData.value.split(" ");
-
         //Open-Weather-Map API call: Data used for most components
-        const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
+        const currentWeatherFetch = fetch(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnit.map}`);
         Promise.all([currentWeatherFetch])
             .then(async (response) => {
                 const weatherResponse = await response[0].json();
@@ -85,8 +84,11 @@ function App() {
             })
             .catch((err) => console.log(err));
         
+            
+        
         //Open-Meteo API call: Data used for hourly forecast
-        const HourlyWeatherFetch = fetch(`${OPEN_METEO_URL}latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code${tempUnitMeteo}`);
+        const HourlyWeatherFetch = fetch(`${OPEN_METEO_URL}latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code${tempUnit.meteo}`);
+
         Promise.all([HourlyWeatherFetch])
             .then(async (response) => {
                 const weatherHourlyResponse = await response[0].json();
@@ -103,7 +105,7 @@ function App() {
     const bookmarkLocation = async () => {
         const { city, lat, lon } = currentWeather;
         try {
-            const response = await axios.get(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnitMap}`);
+            const response = await axios.get(`${OPEN_WEATHER_URL}/onecall?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${tempUnit.map}`);
             const temperature = response.data.current.temp;
             const description = response.data.current.weather[0].description;
             // Check if the city is already in the list
@@ -204,6 +206,7 @@ function App() {
         renderNoSelected = true;
     }
       
+
     return (
 <>      <div className='Search-And-Settings'>
             <div className='search'>

@@ -6,9 +6,9 @@ const handleImageError = (event) => {
 };
 
 
-export default function DailyBlock({day,icon, summary, ActiveIndex, index, test}) {
+export default function DailyBlock({day,icon, summary, ActiveIndex, index, SetActiveIndex}) {
   return (
-      <div className={ActiveIndex === index ? 'Block-Active' : 'Block' } onClick={() => ActiveIndex !== index ? test(index): null}>
+      <div className={ActiveIndex === index ? 'Block-Active' : 'Block' } onClick={() => ActiveIndex !== index ? SetActiveIndex(index): null}>
         <div className='Inner-Parent'>
           <div>{index === 0 ? 'Today':day }</div>
           <div className='Icon-And-Temp'> 

@@ -3,7 +3,7 @@ import DailyBlock from './DailyBlock';
 
 
 
-const Forecast = ({ data, ActiveIndex, test}) => {
+const Forecast = ({ data, ActiveIndex, SetActiveIndex}) => {
     
     function unixTimestampToDay(timestamp) {
         const milliseconds = timestamp * 1000;
@@ -21,7 +21,7 @@ const Forecast = ({ data, ActiveIndex, test}) => {
             summary={Math.round(dailyData.temp['day'])}
             ActiveIndex = {ActiveIndex}
             index ={i}
-            test = {test}
+            SetActiveIndex = {SetActiveIndex}
         />
     ));
 

@@ -227,7 +227,7 @@ function App() {
             <div className="mobile-toggle">
                 {currentWeather && HourlyWeather !== null && <DailyBreakDown hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
             </div>
-            {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} test ={SetActiveIndex}/>}
+            {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} SetActiveIndex ={SetActiveIndex}/>}
             {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings} renderNoSelected = {renderNoSelected}/>}
             <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
         </body>

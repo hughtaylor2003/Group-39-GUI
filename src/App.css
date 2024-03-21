@@ -12,6 +12,7 @@
 
 }
 
+/*body styling*/
 body{
   background: rgb(255,220,124);
   background: linear-gradient(0deg, rgba(255,220,124,1) 0%, rgba(119,245,255,1) 100%);
@@ -22,6 +23,7 @@ body{
   background-attachment: fixed;
 }
 
+/*Main app container styling*/
 .App {
   text-align: center;
   transition: transform 0.5s ease-out; /* Add transition for smooth animation */
@@ -31,20 +33,29 @@ body.settings-open .App {
   transform: translateX(-100%); /* Move the App to the left to reveal Settings */
 }
 
+/*Styling Hourly Weather Section for Mobile*/
+@media screen and (max-width: 768px){
+  .mobile-toggle{
+    min-width: 96vw;
+  }
+}
+/*Styling Hourly Weather Section*/
 .mobile-toggle{
   display: flex;
   justify-content: flex-start;
-  width: 96vw;
+  width: 65.5vw;
   flex-wrap: wrap;
   overflow-x: scroll;
   margin-top: 1.5vw;
   margin-left: 1vw;
-  background-color: rgba(0, 0, 0, 0.311);/*#333333*/
+  background-color: rgb(51, 51, 51,0.4);/*#333333*/
   border-radius: 6px;
   border-style: solid;
   border-color: rgb(51, 51, 51,0.4);/*#333333*/
   overflow-y: auto; /* Enable vertical scrolling if necessary */
   scrollbar-color: 0;
+  margin: auto;
+  margin-top: 1rem;
   }
 
 
@@ -61,6 +72,7 @@ body.settings-open .App {
   margin: 0;
 }
 
+/*search bar and settings container styling*/
 .Search-And-Settings{
   display: flex;
   justify-content: center;
@@ -68,20 +80,30 @@ body.settings-open .App {
   align-items: center;
 }
 
+/*settings button styling*/
 .settings{
   width:20px;
   height: 20px;
 }
 
+/*search bar styling*/
 .search{
   width:70%;
   color:black
 }
 
+/*bookmark section styling*/
 .Bookmark-Section{
   display: flex;
   justify-content: center;
   width: 100%;
   align-items: center;
+}
 
+/*Buttons styling under the search bar*/
+.Bookmark-Section button{
+  color: white;
+  background-color: rgb(51, 51, 51,0.4);
+  border-color: rgba(51, 51, 51, 0.4);
+  padding-inline: 1vw;
 }

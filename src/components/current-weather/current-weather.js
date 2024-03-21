@@ -4,12 +4,13 @@ import "./current-weather.css"
 const CurrentWeather = ({ data, settings }) => {
 
     //Section is for date/time
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
-    const today = new Date();
-    const month = today.getMonth();
-    const date = today.getDate();
-    const currDate = date + ' ' + months[month];
-    const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const dateoptions = { day: '2-digit', month: 'short', timeZone: data.timezone }; // Example: Eastern Time
+    const currDate = new Date().toLocaleDateString([], dateoptions);
+
+    
+    const options = { hour: '2-digit', minute: '2-digit', timeZone: data.timezone };
+    const currTime = new Date().toLocaleTimeString([], options);
+    
     
     let unit = settings.Farenhight ? 'F' : 'C';
 

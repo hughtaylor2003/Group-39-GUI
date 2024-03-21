@@ -46,7 +46,7 @@ export default function Settings({ isOpen, onSubmit }) {
        </div>
        <div>
          <label>
-           <p>Farenhight</p>
+           <p>Fahrenheit</p>
            <input type="checkbox" checked={Farenhight} onChange={() => setFarenhight(!Farenhight)} />
          </label>
        </div>

@@ -1,7 +1,7 @@
 /*************Open Weather API***************/
 
 export const OPEN_WEATHER_URL = 'https://api.openweathermap.org/data/3.0';
-export const OPEN_WEATHER_KEY = '1648041e6f58356be2fc481bbf3e2e93';
+export const OPEN_WEATHER_KEY = '27ae8d03018d1d23f4da578bf01beacf';
 
 
 

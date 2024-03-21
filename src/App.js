@@ -216,22 +216,20 @@ function App() {
             </div>
             <img alt ="icon" onClick={toggleOverlay} className="settings" src={process.env.PUBLIC_URL + `/icons/settings.png`}></img>
         </header>
-        <body>
-            <div className ='Bookmark-Section'>
-                <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
-                <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
-                <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  unit = {tempUnit}/>
-                <button onClick={clearStorage}>Clear bookmarks</button>
-                {currentWeather && HourlyWeather !== null && <button onClick={() => downloadPDF()}> Download</button>}
-            </div>
-            {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
-            <div className="mobile-toggle">
-                {currentWeather && HourlyWeather !== null && <DailyBreakDown hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
-            </div>
-            {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} SetActiveIndex ={SetActiveIndex}/>}
-            {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings} renderNoSelected = {renderNoSelected}/>}
-            <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
-        </body>
+        <div className ='Bookmark-Section'>
+            <button type="submit" className='bookmark-button' onClick={bookmarkLocation}>{isBookmarked ? 'Unbookmark' : 'Bookmark'}</button> 
+            <button onClick={toggleBookmarkPageOverlay}>Open Bookmarks</button>
+            <BookmarkPage isOpen={isBookmarkPageOpen} onClose={() => setIsBookmarkPageOpen(false)} loadBookmark={loadBookmark}  unit = {tempUnit}/>
+            <button onClick={clearStorage}>Clear bookmarks</button>
+            {currentWeather && HourlyWeather !== null && <button onClick={() => downloadPDF()}> Download</button>}
+        </div>
+        {currentWeather && <CurrentWeather data={currentWeather} settings={settings} />}
+        <div className="mobile-toggle">
+            {currentWeather && HourlyWeather !== null && <DailyBreakDown hrdata ={HourlyWeather} ActiveIndex={ActiveIndex} getWeatherIcon ={getWeatherIcon}/>}
+        </div>
+        {currentWeather && <Forecast data={currentWeather} ActiveIndex = {ActiveIndex} SetActiveIndex ={SetActiveIndex}/>}
+        {currentWeather && ActiveIndex !== null && <Extras data={currentWeather} index = {ActiveIndex} settingsOptions= {settings} renderNoSelected = {renderNoSelected}/>}
+        <Settings isOpen={isOpen} onSubmit={handleSettingsSubmit}/>
         </>
         );
 }

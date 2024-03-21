@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     },
     topRight:{
         justifySelf: 'end',
+        alignItems:'flex-end',
+        display:'flex',
+        flexDirection:'column'
     },
     //style city section
     city: {
@@ -65,6 +68,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 1,
         textAlign: 'left',
+        margin: 0,
+    },
+    //time styling
+    currTime: {
+        fontWeight: 400,
+        fontSize: 14,
+        lineHeight: 1,
+        textAlign: 'center',
         margin: 0,
     },
     //style weather condition icon
@@ -121,12 +132,8 @@ const styles = StyleSheet.create({
 const PDFCurrentWeather = ({ data, unit}) => {
 
     //get current date, time, month
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
-    const today = new Date();
-    const month = today.getMonth();
-    const date = today.getDate();
-    const currDate = date + ' ' + months[month];
-    const currTime = new Date().toLocaleTimeString();
+    const currDate = new Date().toLocaleDateString([],{weekday:'long', day:'2-digit', month:'long', timeZone:data.timeZone});
+    const currTime = new Date().toLocaleTimeString([], {timeZone: data.timezone});
 
     //get alert info
     let adviceString = '';
@@ -171,7 +178,7 @@ const PDFCurrentWeather = ({ data, unit}) => {
                 </View>
                 <View style={styles.topRight}>
                     <Text style={styles.city}>{currDate}</Text>
-                    <Text style={styles.weatherDescription}>{currTime}</Text>
+                    <Text style={styles.currTime}>{currTime}</Text>
                 </View>  
             </View>
             <View style={styles.bottom}>

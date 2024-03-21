@@ -39,7 +39,7 @@ export default function DailyBreakDown({hrdata, ActiveIndex, getWeatherIcon}) {
     
   return (
     <>
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div className ='DailyBreakDown'>
         <div className='Daily-Parent'>
             {hrArr}
         </div>

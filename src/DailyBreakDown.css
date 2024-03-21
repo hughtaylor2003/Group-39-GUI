@@ -1,3 +1,9 @@
+.DailyBreakDown{
+    position: 'relative'; 
+    display: 'inline-block';
+}
+
+
 .Daily-Parent{
     display: flex;
     /*
